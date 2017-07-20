@@ -36,7 +36,7 @@ Use `NumberKeyboard` view in your layout:
 ```xml
 <com.davidmiguel.numberkeyboard.NumberKeyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:drag="http://schemas.android.com/apk/res-auto"
+    xmlns:keyboard="http://schemas.android.com/apk/res-auto"
     ...
     keyboard:keyboardType="integer"
     ... />
