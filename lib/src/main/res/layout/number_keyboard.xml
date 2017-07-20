@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:grid="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_row="3"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key0"
+            style="@style/key"
+            android:text="@string/zero"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_row="0"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key1"
+            style="@style/key"
+            android:text="@string/one"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_row="0"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key2"
+            style="@style/key"
+            android:text="@string/two"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="2"
+        grid:layout_columnWeight="1"
+        grid:layout_row="0"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key3"
+            style="@style/key"
+            android:text="@string/three"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key4"
+            style="@style/key"
+            android:text="@string/four"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key5"
+            style="@style/key"
+            android:text="@string/five"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="2"
+        grid:layout_columnWeight="1"
+        grid:layout_row="1"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key6"
+            style="@style/key"
+            android:text="@string/six"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key7"
+            style="@style/key"
+            android:text="@string/seven"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="1"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key8"
+            style="@style/key"
+            android:text="@string/eight"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="2"
+        grid:layout_columnWeight="1"
+        grid:layout_row="2"
+        grid:layout_rowWeight="1">
+
+        <TextView
+            android:id="@+id/key9"
+            style="@style/key"
+            android:text="@string/nine"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="0"
+        grid:layout_columnWeight="1"
+        grid:layout_row="3"
+        grid:layout_rowWeight="1">
+
+        <ImageView
+            android:id="@+id/leftAuxBtn"
+            style="@style/key"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_fingerprint"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        style="@style/key_container"
+        grid:layout_column="2"
+        grid:layout_columnWeight="1"
+        grid:layout_row="3"
+        grid:layout_rowWeight="1">
+
+        <ImageView
+            android:id="@+id/rightAuxBtn"
+            style="@style/key"
+            android:scaleType="center"
+            app:srcCompat="@drawable/ic_fingerprint"/>
+
+    </FrameLayout>
+
+</merge>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="keyboardType">
+        <enum name="integer" value="0"/>
+        <enum name="decimal" value="1"/>
+        <enum name="fingerprint" value="2"/>
+        <enum name="custom" value="3"/>
+    </attr>
+
+    <attr name="keyWidth" format="dimension">
+        <enum name="match_parent" value="-1"/>
+        <enum name="wrap_content" value="-2"/>
+    </attr>
+
+    <attr name="keyHeight" format="dimension">
+        <enum name="match_parent" value="-1"/>
+        <enum name="wrap_content" value="-2"/>
+    </attr>
+
+    <declare-styleable name="NumberKeyboard">
+        <attr name="keyboardType"/>
+        <attr name="keyWidth"/>
+        <attr name="keyHeight"/>
+        <attr name="numberKeyBackground" format="reference"/>
+        <attr name="numberKeyTextSize" format="dimension"/>
+        <attr name="numberKeyTextColor" format="reference"/>
+        <attr name="leftAuxBtnIcon" format="reference"/>
+        <attr name="leftAuxBtnBackground" format="reference"/>
+        <attr name="rightAuxBtnIcon" format="reference"/>
+        <attr name="rightAuxBtnBackground" format="reference"/>
+    </declare-styleable>
+
+</resources>
