@@ -23,8 +23,8 @@ public class KeyboardCustomActivity extends AppCompatActivity implements NumberK
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyboard_custom);
         setTitle("Keyboard custom");
-        amountEditText = (TextView) findViewById(R.id.amount);
-        NumberKeyboard numberKeyboard = (NumberKeyboard) findViewById(R.id.numberKeyboard);
+        amountEditText = findViewById(R.id.amount);
+        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboard);
         numberKeyboard.setListener(this);
     }
 

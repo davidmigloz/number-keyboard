@@ -285,8 +285,8 @@ public class NumberKeyboard extends GridLayout {
         numericKeys.add((TextView) view.findViewById(R.id.key8));
         numericKeys.add((TextView) view.findViewById(R.id.key9));
         // Get auxiliary keys
-        leftAuxBtn = (ImageView) view.findViewById(R.id.leftAuxBtn);
-        rightAuxBtn = (ImageView) view.findViewById(R.id.rightAuxBtn);
+        leftAuxBtn = view.findViewById(R.id.leftAuxBtn);
+        rightAuxBtn = view.findViewById(R.id.rightAuxBtn);
         // Set styles
         setStyles();
         // Set listeners
