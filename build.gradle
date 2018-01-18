@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        google()
     }
     dependencies {
         // Android Plugin for Gradle : https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
@@ -11,7 +12,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven { url 'https://maven.google.com' }
+        google()
     }
 }
 

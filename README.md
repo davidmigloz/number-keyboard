@@ -25,7 +25,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	compile 'com.github.davidmigloz:number-keyboard:0.3'
+	compile 'com.github.davidmigloz:number-keyboard:1.0'
 }
 ```
 
