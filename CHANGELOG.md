@@ -1,7 +1,8 @@
 # Change Log
 
-## Version 2.0.1  *(20/04/2018)*
+## Version 2.0.1  *(23/04/2018)*
 
+- Fix layout issues when using dynamic height #10
 - Fix Proguard is obfuscating everything  #9
 
 ## Version 2.0.0  *(20/04/2018)*

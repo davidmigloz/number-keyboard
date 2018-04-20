@@ -9,9 +9,9 @@ import android.support.annotation.Dimension;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.GridLayout;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -25,7 +25,7 @@ import java.util.List;
  * Number keyboard (to enter pin or custom amount).
  */
 @SuppressWarnings("unused")
-public class NumberKeyboard extends GridLayout {
+public class NumberKeyboard extends ConstraintLayout {
 
     private static final int DEFAULT_KEY_WIDTH_DP = -1; // match_parent
     private static final int DEFAULT_KEY_HEIGHT_DP = -1; // match_parent
