@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:keyboard="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,26 +11,26 @@
 
     <TextView
         android:id="@+id/amount"
+        style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_margin="20dp"
         android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:gravity="center"
-        style="@style/Base.TextAppearance.AppCompat.Title"
-        android:textSize="40sp"
-        android:text="0"/>
+        android:text="0"
+        android:textSize="40sp"/>
 
     <com.davidmiguel.numberkeyboard.NumberKeyboard
         android:id="@+id/numberKeyboard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        keyboard:keyboardType="custom"
-        keyboard:keyWidth="70dp"
         keyboard:keyHeight="70dp"
-        keyboard:numberKeyTextSize="30sp"
-        keyboard:numberKeyTextColor="@drawable/key_text_blue"
-        keyboard:leftAuxBtnIcon="@drawable/ic_fingerprint"
+        keyboard:keyPadding="8dp"
+        keyboard:keyWidth="70dp"
+        keyboard:keyboardType="custom"
         keyboard:leftAuxBtnBackground="@drawable/key_bg_square"
-        keyboard:rightAuxBtnIcon="@drawable/ic_backspace" />
+        keyboard:leftAuxBtnIcon="@drawable/ic_fingerprint"
+        keyboard:numberKeyTextColor="@drawable/key_text_blue"
+        keyboard:rightAuxBtnIcon="@drawable/ic_backspace"/>
 
 </LinearLayout>

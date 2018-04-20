@@ -10,20 +10,18 @@
 
     <attr name="keyWidth" format="dimension">
         <enum name="match_parent" value="-1"/>
-        <enum name="wrap_content" value="-2"/>
     </attr>
 
     <attr name="keyHeight" format="dimension">
         <enum name="match_parent" value="-1"/>
-        <enum name="wrap_content" value="-2"/>
     </attr>
 
     <declare-styleable name="NumberKeyboard">
         <attr name="keyboardType"/>
         <attr name="keyWidth"/>
         <attr name="keyHeight"/>
+        <attr name="keyPadding" format="dimension"/>
         <attr name="numberKeyBackground" format="reference"/>
-        <attr name="numberKeyTextSize" format="dimension"/>
         <attr name="numberKeyTextColor" format="reference"/>
         <attr name="leftAuxBtnIcon" format="reference"/>
         <attr name="leftAuxBtnBackground" format="reference"/>

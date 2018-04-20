@@ -25,9 +25,11 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	compile 'com.github.davidmigloz:number-keyboard:1.0'
+	compile 'com.github.davidmigloz:number-keyboard:2.0'
 }
 ```
+
+[CHANGELOG](https://github.com/davidmigloz/number-keyboard/blob/master/CHANGELOG.md)
 
 #### Step 3
 
@@ -49,9 +51,10 @@ Use `NumberKeyboard` view in your layout:
   - `decimal`: numbers, comma and backspace keys.
   - `fingerprint`: numbers, fingerprint and backspace keys.
   - `custom`: numbers and defined auxiliary keys.
-- `keyboard:keyHeight="[dimension]"` (default: 70dp): key height.
+- `keyboard:keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).      
+- `keyboard:keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
+- `keyboard:keyPadding="[dimension]"` (default: `16dp`): key padding.
 - `keyboard:numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
-- `keyboard:numberKeyTextSize="[dimension]"` (default: 32sp): number keys text size.
 - `keyboard:numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
 - `keyboard:leftAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in left auxiliary button.
 - `keyboard:leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
@@ -66,8 +69,8 @@ Use `NumberKeyboard` view in your layout:
 - `showRightAuxButton()`: shows right auxiliary button.
 - `setKeyWidth()`: sets key width in px.
 - `setKeyHeight()`: sets key height in px.
+- `setKeyPadding()`: sets key padding in px.
 - `setNumberKeyBackground()`: sets number keys background.
-- `setNumberKeyTextSize()`: sets number keys text size.
 - `setNumberKeyTextColor()`: sets number keys text color.
 - `setNumberKeyTypeface()`: sets number keys text typeface.
 - `setLeftAuxButtonIcon()`: sets left auxiliary button icon.
@@ -105,7 +108,7 @@ Pull request are very appreciated.
 
 ## License
 
-Copyright (c) 2017 David Miguel Lozano
+Copyright (c) 2018 David Miguel Lozano
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

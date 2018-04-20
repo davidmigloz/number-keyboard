@@ -27,9 +27,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class NumberKeyboard extends GridLayout {
 
-    private static final int DEFAULT_KEY_WIDTH_DP = 70;
-    private static final int DEFAULT_KEY_HEIGHT_DP = 70;
-    private static final int DEFAULT_KEY_TEXT_SIZE_SP = 32;
+    private static final int DEFAULT_KEY_WIDTH_DP = -1; // match_parent
+    private static final int DEFAULT_KEY_HEIGHT_DP = -1; // match_parent
+    private static final int DEFAULT_KEY_PADDING_DP = 16;
 
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
@@ -39,10 +39,10 @@ public class NumberKeyboard extends GridLayout {
     private int keyWidth;
     @Dimension
     private int keyHeight;
+    @Dimension
+    private int keyPadding;
     @DrawableRes
     private int numberKeyBackground;
-    @Dimension
-    private int numberKeyTextSize;
     @ColorRes
     private int numberKeyTextColor;
     @DrawableRes
@@ -116,6 +116,9 @@ public class NumberKeyboard extends GridLayout {
      * Sets key width in px.
      */
     public void setKeyWidth(int px) {
+        if (px == DEFAULT_KEY_WIDTH_DP) {
+            return;
+        }
         for (TextView key : numericKeys) {
             key.getLayoutParams().width = px;
         }
@@ -128,6 +131,9 @@ public class NumberKeyboard extends GridLayout {
      * Sets key height in px.
      */
     public void setKeyHeight(int px) {
+        if (px == DEFAULT_KEY_HEIGHT_DP) {
+            return;
+        }
         for (TextView key : numericKeys) {
             key.getLayoutParams().height = px;
         }
@@ -137,20 +143,23 @@ public class NumberKeyboard extends GridLayout {
     }
 
     /**
+     * Sets key padding in px.
+     */
+    public void setKeyPadding(int px) {
+        for (TextView key : numericKeys) {
+            key.setPadding(px, px, px, px);
+            key.setCompoundDrawablePadding(-1 * px);
+        }
+        leftAuxBtn.setPadding(px, px, px, px);
+        rightAuxBtn.setPadding(px, px, px, px);
+    }
+
+    /**
      * Sets number keys background.
      */
     public void setNumberKeyBackground(@DrawableRes int background) {
         for (TextView key : numericKeys) {
             key.setBackground(ContextCompat.getDrawable(getContext(), background));
-        }
-    }
-
-    /**
-     * Sets number keys text size.
-     */
-    public void setNumberKeyTextSize(@Dimension int size) {
-        for (TextView key : numericKeys) {
-            key.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
         }
     }
 
@@ -213,16 +222,14 @@ public class NumberKeyboard extends GridLayout {
                 throw new IllegalArgumentException("keyboardType attribute is required.");
             }
             // Get key sizes
-            keyWidth = array.getLayoutDimension(R.styleable.NumberKeyboard_keyWidth,
-                    dpToPx(DEFAULT_KEY_WIDTH_DP));
-            keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_keyHeight,
-                    dpToPx(DEFAULT_KEY_HEIGHT_DP));
+            keyWidth = array.getLayoutDimension(R.styleable.NumberKeyboard_keyWidth, DEFAULT_KEY_WIDTH_DP);
+            keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_keyHeight, DEFAULT_KEY_HEIGHT_DP);
+            // Get key padding
+            keyPadding = array.getDimensionPixelSize(R.styleable.NumberKeyboard_keyPadding,
+                    dpToPx(DEFAULT_KEY_PADDING_DP));
             // Get number key background
             numberKeyBackground = array.getResourceId(R.styleable.NumberKeyboard_numberKeyBackground,
                     R.drawable.key_bg);
-            // Get number key text size
-            numberKeyTextSize = array.getDimensionPixelSize(R.styleable.NumberKeyboard_numberKeyTextSize,
-                    spToPx(DEFAULT_KEY_TEXT_SIZE_SP));
             // Get number key text color
             numberKeyTextColor = array.getResourceId(R.styleable.NumberKeyboard_numberKeyTextColor,
                     R.drawable.key_text_color);
@@ -299,8 +306,8 @@ public class NumberKeyboard extends GridLayout {
     private void setStyles() {
         setKeyWidth(keyWidth);
         setKeyHeight(keyHeight);
+        setKeyPadding(keyPadding);
         setNumberKeyBackground(numberKeyBackground);
-        setNumberKeyTextSize(numberKeyTextSize);
         setNumberKeyTextColor(numberKeyTextColor);
         setLeftAuxButtonIcon(leftAuxBtnIcon);
         setLeftAuxButtonBackground(leftAuxBtnBackground);
@@ -349,12 +356,5 @@ public class NumberKeyboard extends GridLayout {
      */
     public int dpToPx(float valueInDp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, getResources().getDisplayMetrics());
-    }
-
-    /**
-     * Utility method to convert sp to pixels.
-     */
-    public int spToPx(float valueInSp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, valueInSp, getResources().getDisplayMetrics());
     }
 }

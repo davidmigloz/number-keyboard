@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="1"
         grid:layout_columnWeight="1"
@@ -19,9 +19,9 @@
             style="@style/key"
             android:text="@string/zero"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="0"
         grid:layout_columnWeight="1"
@@ -33,9 +33,9 @@
             style="@style/key"
             android:text="@string/one"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="1"
         grid:layout_columnWeight="1"
@@ -47,9 +47,9 @@
             style="@style/key"
             android:text="@string/two"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="2"
         grid:layout_columnWeight="1"
@@ -61,9 +61,9 @@
             style="@style/key"
             android:text="@string/three"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="0"
         grid:layout_columnWeight="1"
@@ -75,9 +75,9 @@
             style="@style/key"
             android:text="@string/four"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="1"
         grid:layout_columnWeight="1"
@@ -89,9 +89,9 @@
             style="@style/key"
             android:text="@string/five"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="2"
         grid:layout_columnWeight="1"
@@ -103,9 +103,9 @@
             style="@style/key"
             android:text="@string/six"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="0"
         grid:layout_columnWeight="1"
@@ -117,9 +117,9 @@
             style="@style/key"
             android:text="@string/seven"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="1"
         grid:layout_columnWeight="1"
@@ -131,9 +131,9 @@
             style="@style/key"
             android:text="@string/eight"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="2"
         grid:layout_columnWeight="1"
@@ -145,9 +145,9 @@
             style="@style/key"
             android:text="@string/nine"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="0"
         grid:layout_columnWeight="1"
@@ -160,9 +160,9 @@
             android:scaleType="center"
             app:srcCompat="@drawable/ic_fingerprint"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <FrameLayout
+    <com.davidmiguel.numberkeyboard.SquareFrameLayout
         style="@style/key_container"
         grid:layout_column="2"
         grid:layout_columnWeight="1"
@@ -175,6 +175,6 @@
             android:scaleType="center"
             app:srcCompat="@drawable/ic_fingerprint"/>
 
-    </FrameLayout>
+    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
 </merge>
