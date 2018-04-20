@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
-ext.versionMajor = 1 // API Changes, adding big new feature, redesign the App
-ext.versionMinor = 1 // New features in a backwards-compatible manner
-ext.versionPatch = 0 // Backwards-compatible bug fixes
+ext.versionMajor = 2 // API Changes, adding big new feature, redesign the App
+ext.versionMinor = 0 // New features in a backwards-compatible manner
+ext.versionPatch = 1 // Backwards-compatible bug fixes
 ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 android {
@@ -15,14 +15,6 @@ android {
         versionCode generateVersionCode()
         versionName generateVersionName()
         vectorDrawables.useSupportLibrary = true
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled true
-            zipAlignEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
 }
 
