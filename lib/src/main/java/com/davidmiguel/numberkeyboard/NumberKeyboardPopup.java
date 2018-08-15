@@ -230,8 +230,6 @@ public class NumberKeyboardPopup {
                         inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
                     }
                 }
-
-
             }
         } else {
             dismiss();

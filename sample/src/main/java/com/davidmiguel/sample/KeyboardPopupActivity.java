@@ -1,9 +1,11 @@
 package com.davidmiguel.sample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
@@ -161,8 +163,12 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
                 updateAmount(newAmountText, selectionEnd > 0 ? selectionEnd - 1 : 0);
                 break;
             case 3:
-                // Enter button
-                onBackPressed();
+                // Enter button, close keyboard
+                final InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputMethodManager != null) {
+                    inputMethodManager.hideSoftInputFromWindow(amountEditText.getWindowToken(), 0);
+                }
+
                 break;
         }
     }

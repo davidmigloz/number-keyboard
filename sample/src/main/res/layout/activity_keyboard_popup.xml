@@ -5,7 +5,7 @@
     android:id="@+id/main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="50dp"
+    android:paddingBottom="100dp"
     tools:context="com.davidmiguel.sample.MainActivity">
 
     <LinearLayout
@@ -28,6 +28,7 @@
         android:layout_height="wrap_content"
         android:inputType="none"
         android:layout_gravity="top"
+        android:maxLines="1"
         android:gravity="top"
         android:hint="0"
         android:textSize="40sp"/>
