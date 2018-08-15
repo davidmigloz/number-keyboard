@@ -3,5 +3,5 @@
     xmlns:keyboard="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    keyboard:keyboardType="four_rows"
+    keyboard:keyboardType="four_columns"
     />

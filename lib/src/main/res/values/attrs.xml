@@ -6,7 +6,7 @@
         <enum name="decimal" value="1"/>
         <enum name="fingerprint" value="2"/>
         <enum name="custom" value="3"/>
-        <enum name="four_rows" value="4"/>
+        <enum name="four_columns" value="4"/>
     </attr>
 
     <attr name="keyWidth" format="dimension">

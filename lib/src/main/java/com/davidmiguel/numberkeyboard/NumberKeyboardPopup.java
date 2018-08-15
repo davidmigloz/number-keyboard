@@ -22,6 +22,11 @@ import android.widget.PopupWindow;
 import static com.davidmiguel.numberkeyboard.NumberKeyboard.dpToPx;
 
 /**
+ * Create a popup window that shows as soon as the IME (soft keyboard) shows and overlays the keyboard. It will show
+ * a number pad as per the layout.
+ *
+ * This is loosely based on the excellent popup / IME handling in https://github.com/vanniktech/Emoji (also under Apache License)
+ *
  * Created by Kevin Read <me@kevin-read.com> on 14.08.18 for number-keyboard.
  * Copyright (c) 2018 BörseGo AG. All rights reserved.
  */
