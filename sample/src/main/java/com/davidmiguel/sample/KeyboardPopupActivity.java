@@ -2,21 +2,27 @@ package com.davidmiguel.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.EditText;
 
-import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
+import com.davidmiguel.numberkeyboard.NumberKeyboardPopup;
 
-public class KeyboardDecimalActivity extends AppCompatActivity implements NumberKeyboardListener {
+/**
+ * Created by Kevin Read <me@kevin-read.com> on 14.08.18 for number-keyboard.
+ * Copyright (c) 2018 BörseGo AG. All rights reserved.
+ */
+public class KeyboardPopupActivity extends AppCompatActivity implements NumberKeyboardListener {
 
     private static final double MAX_ALLOWED_AMOUNT = 9999.99;
     private static final int MAX_ALLOWED_DECIMALS = 2;
 
-    private TextView amountEditText;
+    private EditText amountEditText;
     private String amountText;
     private double amount;
+    private NumberKeyboardPopup popup;
 
-    public KeyboardDecimalActivity() {
+    public KeyboardPopupActivity() {
         this.amountText = "";
         this.amount = 0.0;
     }
@@ -24,11 +30,20 @@ public class KeyboardDecimalActivity extends AppCompatActivity implements Number
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_keyboard_decimal);
+        setContentView(R.layout.activity_keyboard_popup);
         setTitle("Keyboard decimal");
         amountEditText = findViewById(R.id.amount);
-        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboard);
-        numberKeyboard.setListener(this);
+
+        popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setNumberKeyboardListener(this).setKeyboardLayout(R.layout.popup_keyboard).build(amountEditText);
+
+        amountEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!popup.isShowing()) {
+                    popup.toggle();
+                }
+            }
+        });
     }
 
     @Override
@@ -41,37 +56,44 @@ public class KeyboardDecimalActivity extends AppCompatActivity implements Number
 
     @Override
     public void onLeftAuxButtonClicked() {
-        // Comma button
-        if (!hasComma(amountText)) {
-            amountText = amountText.isEmpty() ? "0," : amountText + ",";
-            showAmount(amountText);
+        // Nothing to do
+    }
+
+    @Override
+    public void onModifierButtonClicked(int number) {
+        switch (number) {
+            case 0:
+                // Comma button
+                if (!hasComma(amountText)) {
+                    amountText = amountText.isEmpty() ? "0," : amountText + ",";
+                    showAmount(amountText);
+                }
+                break;
+            case 2:
+                // Delete button
+                if (amountText.isEmpty()) {
+                    return;
+                }
+                String newAmountText;
+                if (amountText.length() <= 1) {
+                    newAmountText = "";
+                } else {
+                    newAmountText = amountText.substring(0, amountText.length() - 1);
+                    if (newAmountText.charAt(newAmountText.length() - 1) == ',') {
+                        newAmountText = newAmountText.substring(0, newAmountText.length() - 1);
+                    }
+                    if ("0".equals(newAmountText)) {
+                        newAmountText = "";
+                    }
+                }
+                updateAmount(newAmountText);
+                break;
         }
     }
 
     @Override
     public void onRightAuxButtonClicked() {
-        // Delete button
-        if (amountText.isEmpty()) {
-            return;
-        }
-        String newAmountText;
-        if (amountText.length() <= 1) {
-            newAmountText = "";
-        } else {
-            newAmountText = amountText.substring(0, amountText.length() - 1);
-            if (newAmountText.charAt(newAmountText.length() - 1) == ',') {
-                newAmountText = newAmountText.substring(0, newAmountText.length() - 1);
-            }
-            if ("0".equals(newAmountText)) {
-                newAmountText = "";
-            }
-        }
-        updateAmount(newAmountText);
-    }
-
-    @Override
-    public void onModifierButtonClicked(int number) {
-        // Keyboard has no modifier column
+        // Nothing to do
     }
 
     /**

@@ -59,6 +59,8 @@ public class NumberKeyboard extends ConstraintLayout {
     private ImageView rightAuxBtn;
 
     private NumberKeyboardListener listener;
+    private int layoutId = R.layout.number_keyboard;
+    private List<View> modifierKeys;
 
     public NumberKeyboard(@NonNull Context context) {
         super(context);
@@ -124,6 +126,11 @@ public class NumberKeyboard extends ConstraintLayout {
         }
         leftAuxBtn.getLayoutParams().width = px;
         rightAuxBtn.getLayoutParams().width = px;
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                modifierKey.getLayoutParams().width = px;
+            }
+        }
         requestLayout();
     }
 
@@ -139,6 +146,11 @@ public class NumberKeyboard extends ConstraintLayout {
         }
         leftAuxBtn.getLayoutParams().height = px;
         rightAuxBtn.getLayoutParams().height = px;
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                modifierKey.getLayoutParams().height = px;
+            }
+        }
         requestLayout();
     }
 
@@ -152,6 +164,14 @@ public class NumberKeyboard extends ConstraintLayout {
         }
         leftAuxBtn.setPadding(px, px, px, px);
         rightAuxBtn.setPadding(px, px, px, px);
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                if (modifierKey instanceof TextView) {
+                    ((TextView)modifierKey).setCompoundDrawablePadding(-1 * px);
+                }
+                modifierKey.setPadding(px, px, px, px);
+            }
+        }
     }
 
     /**
@@ -160,6 +180,13 @@ public class NumberKeyboard extends ConstraintLayout {
     public void setNumberKeyBackground(@DrawableRes int background) {
         for (TextView key : numericKeys) {
             key.setBackground(ContextCompat.getDrawable(getContext(), background));
+        }
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                if (modifierKey instanceof TextView) {
+                    modifierKey.setBackground(ContextCompat.getDrawable(getContext(), background));
+                }
+            }
         }
     }
 
@@ -170,6 +197,14 @@ public class NumberKeyboard extends ConstraintLayout {
         for (TextView key : numericKeys) {
             key.setTextColor(ContextCompat.getColorStateList(getContext(), color));
         }
+
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                if (modifierKey instanceof TextView) {
+                    ((TextView)modifierKey).setTextColor(ContextCompat.getColorStateList(getContext(), color));
+                }
+            }
+        }
     }
 
     /**
@@ -178,6 +213,14 @@ public class NumberKeyboard extends ConstraintLayout {
     public void setNumberKeyTypeface(Typeface typeface) {
         for (TextView key : numericKeys) {
             key.setTypeface(typeface);
+        }
+
+        if (modifierKeys != null) {
+            for (View modifierKey : modifierKeys) {
+                if (modifierKey instanceof TextView) {
+                    ((TextView) modifierKey).setTypeface(typeface);
+                }
+            }
         }
     }
 
@@ -263,6 +306,13 @@ public class NumberKeyboard extends ConstraintLayout {
                     rightAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_rightAuxBtnBackground,
                             R.drawable.key_bg_transparent);
                     break;
+                case 4: // four rows
+                    leftAuxBtnIcon = R.drawable.key_bg_transparent;
+                    rightAuxBtnIcon = R.drawable.key_bg_transparent;
+                    leftAuxBtnBackground = R.drawable.key_bg_transparent;
+                    rightAuxBtnBackground = R.drawable.key_bg_transparent;
+                    layoutId = R.layout.number_keyboard_4rows;
+                    break;
                 default:
                     leftAuxBtnIcon = R.drawable.key_bg_transparent;
                     rightAuxBtnIcon = R.drawable.key_bg_transparent;
@@ -278,7 +328,7 @@ public class NumberKeyboard extends ConstraintLayout {
      * Inflates layout.
      */
     private void inflateView() {
-        View view = inflate(getContext(), R.layout.number_keyboard, this);
+        View view = inflate(getContext(), layoutId, this);
         // Get numeric keys
         numericKeys = new ArrayList<>(10);
         numericKeys.add((TextView) view.findViewById(R.id.key0));
@@ -294,6 +344,16 @@ public class NumberKeyboard extends ConstraintLayout {
         // Get auxiliary keys
         leftAuxBtn = view.findViewById(R.id.leftAuxBtn);
         rightAuxBtn = view.findViewById(R.id.rightAuxBtn);
+
+        // Check existence of and then get optional fourth row buttons
+        final View keyModifier1 = view.findViewById(R.id.keyModifier1);
+        if (keyModifier1 != null) {
+            modifierKeys = new ArrayList<>(4);
+            modifierKeys.add(keyModifier1);
+            modifierKeys.add(view.findViewById(R.id.keyModifier2));
+            modifierKeys.add(view.findViewById(R.id.buttonModifier3));
+            modifierKeys.add(view.findViewById(R.id.buttonModifier4));
+        }
         // Set styles
         setStyles();
         // Set listeners
@@ -349,6 +409,24 @@ public class NumberKeyboard extends ConstraintLayout {
                 }
             }
         });
+
+        if (modifierKeys != null) {
+            int i = 0;
+
+            for (View modifierKey : modifierKeys) {
+                final int modifierIdx = i;
+                i++;
+
+                modifierKey.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null) {
+                            listener.onModifierButtonClicked(modifierIdx);
+                        }
+                    }
+                });
+            }
+        }
     }
 
     /**

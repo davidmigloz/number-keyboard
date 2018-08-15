@@ -34,4 +34,9 @@ public interface NumberKeyboardListener {
      * Invoked when the right auxiliary button is clicked.
      */
     void onRightAuxButtonClicked();
+
+    /**
+     * Invoked when a modifier button is clicked
+     */
+    void onModifierButtonClicked(int number);
 }

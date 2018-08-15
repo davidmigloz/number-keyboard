@@ -47,6 +47,11 @@ public class KeyboardIntegerActivity extends AppCompatActivity implements Number
         showAmount();
     }
 
+    @Override
+    public void onModifierButtonClicked(int number) {
+        // Keyboard has no modifiers
+    }
+
     private void showAmount() {
         amountEditText.setText(nf.format(amount));
     }
