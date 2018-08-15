@@ -19,14 +19,16 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
+import static com.davidmiguel.numberkeyboard.NumberKeyboard.dpToPx;
+
 /**
  * Created by Kevin Read <me@kevin-read.com> on 14.08.18 for number-keyboard.
  * Copyright (c) 2018 BörseGo AG. All rights reserved.
  */
 public class NumberKeyboardPopup {
 
-    private static final long DELAY_HIDE_MS = 300l;
-    private static final long DELAY_SHOW_KEYBOARD_MS = 200l;
+    private static final long DELAY_HIDE_MS = 300L;
+    private static final long DELAY_SHOW_KEYBOARD_MS = 200L;
 
     public interface PopupListener {
         void onPopupVisibilityChanged(final boolean isShown);
@@ -37,31 +39,28 @@ public class NumberKeyboardPopup {
         void onKeyboardShown(int heightDifference);
     }
 
-    static final int MIN_KEYBOARD_HEIGHT = 100;
+    private static final int MIN_KEYBOARD_HEIGHT = 100;
 
-    final View rootView;
-    final Activity context;
+    private final View rootView;
+    private final Activity context;
 
     @NonNull
     final private NumberKeyboard keyboard;
 
-    final PopupWindow popupWindow;
+    private final PopupWindow popupWindow;
     final private EditText editText;
 
-    boolean isPendingOpen;
-    boolean isKeyboardOpen;
+    private boolean isPendingOpen;
+    private boolean isKeyboardOpen;
 
-    @NonNull static Rect windowVisibleDisplayFrame(@NonNull final Activity context) {
+    @NonNull
+    private static Rect windowVisibleDisplayFrame(@NonNull final Activity context) {
         final Rect result = new Rect();
         context.getWindow().getDecorView().getWindowVisibleDisplayFrame(result);
         return result;
     }
 
-    static int dpToPx(@NonNull final Context context, final float dp) {
-        return (int) (dp * context.getResources().getDisplayMetrics().density);
-    }
-
-    static int screenHeight(@NonNull final Activity context) {
+    private static int screenHeight(@NonNull final Activity context) {
         final Point size = new Point();
 
         context.getWindowManager().getDefaultDisplay().getSize(size);
@@ -69,7 +68,7 @@ public class NumberKeyboardPopup {
         return size.y;
     }
 
-    static Activity asActivity(@NonNull final Context context) {
+    private static Activity asActivity(@NonNull final Context context) {
         Context result = context;
 
         while (result instanceof ContextWrapper) {
@@ -83,15 +82,16 @@ public class NumberKeyboardPopup {
         throw new IllegalArgumentException("The passed Context is not an Activity.");
     }
 
-    @NonNull static Point locationOnScreen(@NonNull final View view) {
+    @NonNull
+    private static Point locationOnScreen(@NonNull final View view) {
         final int[] location = new int[2];
         view.getLocationOnScreen(location);
         return new Point(location[0], location[1]);
     }
 
-    static final int DONT_UPDATE_FLAG = -1;
+    private static final int DONT_UPDATE_FLAG = -1;
 
-    static void fixPopupLocation(@NonNull final PopupWindow popupWindow, @NonNull final Point desiredLocation) {
+    private static void fixPopupLocation(@NonNull final PopupWindow popupWindow, @NonNull final Point desiredLocation) {
         popupWindow.getContentView().post(new Runnable() {
             @Override public void run() {
                 final Point actualLocation = locationOnScreen(popupWindow.getContentView());
@@ -125,7 +125,7 @@ public class NumberKeyboardPopup {
     private PopupListener onPopupShownListener;
     @Nullable private KeyboardShownListener onSoftKeyboardShowListener;
 
-    final ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
+    private final ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
         @Override public void onGlobalLayout() {
             final Rect rect = windowVisibleDisplayFrame(context);
             final int heightDifference = screenHeight(context) - rect.bottom;
@@ -173,7 +173,9 @@ public class NumberKeyboardPopup {
         @Override
         public void run() {
             final InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            if (inputMethodManager != null) {
+                inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+            }
         }
     };
 
@@ -224,7 +226,9 @@ public class NumberKeyboardPopup {
                 } else {
                     showAtBottomPending();
                     final InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                    if (inputMethodManager != null) {
+                        inputMethodManager.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                    }
                 }
 
 
@@ -245,7 +249,7 @@ public class NumberKeyboardPopup {
         popupWindow.dismiss();
     }
 
-    void showAtBottom() {
+    private void showAtBottom() {
         final Point desiredLocation = new Point(0, screenHeight(context) - popupWindow.getHeight());
 
         popupWindow.showAtLocation(rootView, Gravity.NO_GRAVITY, desiredLocation.x, desiredLocation.y);
@@ -269,14 +273,9 @@ public class NumberKeyboardPopup {
         @Nullable private PopupListener onPopupShownListener;
         @Nullable private KeyboardShownListener onSoftKeyboardShownListener;
         @Nullable private NumberKeyboardListener onNumberKeyboardListener;
-        private @LayoutRes
-        int mKeyboardLayout;
-        private int keyboardLayout;
+        @LayoutRes private int keyboardLayout;
 
         public Builder(@NonNull final View rootView) {
-            if (rootView == null) {
-                throw new RuntimeException("Root view cannot be null");
-            }
             this.rootView = rootView;
         }
 
@@ -311,10 +310,6 @@ public class NumberKeyboardPopup {
         }
 
         @CheckResult public NumberKeyboardPopup build(@NonNull final EditText editText) {
-            if (editText == null) {
-                throw new RuntimeException("EditText cannot be null");
-            }
-
             final NumberKeyboardPopup popup = new NumberKeyboardPopup(rootView, editText, keyboardLayout);
             popup.onPopupShownListener = onPopupShownListener;
             popup.onSoftKeyboardShowListener = onSoftKeyboardShownListener;

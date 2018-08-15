@@ -2,11 +2,17 @@ package com.davidmiguel.sample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.davidmiguel.numberkeyboard.NumberKeyboardPopup;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * Created by Kevin Read <me@kevin-read.com> on 14.08.18 for number-keyboard.
@@ -19,20 +25,32 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
 
     private EditText amountEditText;
     private String amountText;
-    private double amount;
     private NumberKeyboardPopup popup;
+    private String groupingSeparator;
+    private NumberFormat numberFormat;
+
+    private static final String TAG = KeyboardPopupActivity.class.getSimpleName();
+    private char groupSeparatorChar;
 
     public KeyboardPopupActivity() {
         this.amountText = "";
-        this.amount = 0.0;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_keyboard_popup);
-        setTitle("Keyboard decimal");
+        setTitle("Keyboard decimal popup");
         amountEditText = findViewById(R.id.amount);
+
+        numberFormat = NumberFormat.getInstance();
+        if (numberFormat instanceof DecimalFormat) {
+            DecimalFormatSymbols sym = ((DecimalFormat) numberFormat).getDecimalFormatSymbols();
+            groupSeparatorChar = sym.getGroupingSeparator();
+            groupingSeparator = String.valueOf(groupSeparatorChar);
+        }
+
+        numberFormat.setMaximumFractionDigits(MAX_ALLOWED_DECIMALS);
 
         popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setNumberKeyboardListener(this).setKeyboardLayout(R.layout.popup_keyboard).build(amountEditText);
 
@@ -48,10 +66,21 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
 
     @Override
     public void onNumberClicked(int number) {
-        if (amountText.isEmpty() && number == 0) {
+        if ((amountText.isEmpty() || amountText.equals("-")) && number == 0) {
             return;
         }
-        updateAmount(amountText + number);
+        final int selectionStart = amountEditText.getSelectionStart();
+        final int selectionEnd = amountEditText.getSelectionEnd();
+        final StringBuilder sb = new StringBuilder();
+        if (selectionStart > 0) {
+            sb.append(amountText.substring(0, selectionStart));
+        }
+        sb.append(number);
+        if (selectionEnd < amountText.length() - 1) {
+            sb.append(selectionEnd);
+        }
+        amountText = sb.toString();
+        updateAmount(amountText, selectionStart + 1);
     }
 
     @Override
@@ -63,10 +92,29 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
     public void onModifierButtonClicked(int number) {
         switch (number) {
             case 0:
+                // Minus button
+                int currentSelection = amountEditText.getSelectionStart();
+                if (!amountText.startsWith("-")) {
+                    amountText = "-" + amountText;
+                    currentSelection++;
+                } else {
+                    amountText = amountText.substring(1);
+                    currentSelection--;
+                }
+                showAmount(amountText);
+                amountEditText.setSelection(currentSelection);
+                break;
+            case 1:
                 // Comma button
-                if (!hasComma(amountText)) {
+                if (!amountText.contains(",")) {
+                    currentSelection = amountEditText.getSelectionStart();
+                    // If we are currently at the last position, set cursor after the comma
+                    if (currentSelection == amountEditText.length()) {
+                        currentSelection++;
+                    }
                     amountText = amountText.isEmpty() ? "0," : amountText + ",";
                     showAmount(amountText);
+                    amountEditText.setSelection(currentSelection);
                 }
                 break;
             case 2:
@@ -75,20 +123,58 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
                     return;
                 }
                 String newAmountText;
+
+                final int selectionStart = amountEditText.getSelectionStart();
+                final int selectionEnd = amountEditText.getSelectionEnd();
+
                 if (amountText.length() <= 1) {
                     newAmountText = "";
                 } else {
-                    newAmountText = amountText.substring(0, amountText.length() - 1);
-                    if (newAmountText.charAt(newAmountText.length() - 1) == ',') {
-                        newAmountText = newAmountText.substring(0, newAmountText.length() - 1);
+                    // Check if we have a selection
+                    // Strip complete selection
+                    final StringBuilder sb = new StringBuilder();
+                    if (selectionStart == selectionEnd) {
+                        if (selectionStart > 1) {
+                            sb.append(amountText.substring(0, selectionStart - 1));
+                        }
+                        if (selectionStart < amountText.length()) {
+                            sb.append(amountText.substring(selectionStart));
+                        }
+                    } else {
+                        if (selectionStart > 0) {
+                            sb.append(amountText.substring(0, selectionStart));
+                        }
+                        if (selectionEnd < amountText.length() - 1) {
+                            sb.append(selectionEnd);
+                        }
                     }
-                    if ("0".equals(newAmountText)) {
-                        newAmountText = "";
+                    newAmountText = sb.toString();
+                    if (!newAmountText.isEmpty()) {
+                        if (newAmountText.charAt(newAmountText.length() - 1) == ',') {
+                            newAmountText = newAmountText.substring(0, newAmountText.length() - 1);
+                        }
+                        if ("0".equals(newAmountText)) {
+                            newAmountText = "";
+                        }
                     }
                 }
-                updateAmount(newAmountText);
+                updateAmount(newAmountText, selectionEnd > 0 ? selectionEnd - 1 : 0);
+                break;
+            case 3:
+                // Enter button
+                onBackPressed();
                 break;
         }
+    }
+
+    public int countCommas(final String haystack) {
+        int count = 0;
+        for (int i = 0; i < haystack.length(); i++) {
+            if (haystack.charAt(i) == groupSeparatorChar) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
@@ -98,66 +184,30 @@ public class KeyboardPopupActivity extends AppCompatActivity implements NumberKe
 
     /**
      * Update new entered amount if it is valid.
+     *
+     * @param newAmountText   new text to parse and format
+     * @param newSelectionIdx position that should be the new selection if possible
      */
-    private void updateAmount(String newAmountText) {
-        double newAmount = newAmountText.isEmpty() ? 0.0 : Double.parseDouble(newAmountText.replaceAll(",", "."));
-        if (newAmount >= 0.0 && newAmount <= MAX_ALLOWED_AMOUNT
-                && getNumDecimals(newAmountText) <= MAX_ALLOWED_DECIMALS) {
-            amountText = newAmountText;
-            amount = newAmount;
-            showAmount(amountText);
-        }
-    }
+    private void updateAmount(String newAmountText, int newSelectionIdx) {
+        try {
+            final int numOldCommas = countCommas(newAmountText);
+            double newAmount = newAmountText.isEmpty() ? 0.0 : numberFormat.parse(newAmountText.replace(groupingSeparator, "")).doubleValue();
+            newAmount = Math.min(newAmount, MAX_ALLOWED_AMOUNT);
+            this.amountText = numberFormat.format(newAmount);
+            showAmount(this.amountText);
 
-    /**
-     * Add . every thousand.
-     */
-    private String addThousandSeparator(String amount) {
-        String integer;
-        String decimal;
-        if (amount.indexOf(',') >= 0) {
-            integer = amount.substring(0, amount.indexOf(','));
-            decimal = amount.substring(amount.indexOf(','), amount.length());
-        } else {
-            integer = amount;
-            decimal = "";
+            final int newLength = amountText.length();
+            newSelectionIdx -= numOldCommas - countCommas(amountText);
+            amountEditText.setSelection(newSelectionIdx <= newLength ? newSelectionIdx : newLength);
+        } catch (ParseException e) {
+            Log.e(TAG, "Cannot parse amount '" + newAmountText + "'");
         }
-        if (integer.length() > 3) {
-            StringBuilder tmp = new StringBuilder(integer);
-            for (int i = integer.length() - 3; i > 0; i = i - 3) {
-                tmp.insert(i, ".");
-            }
-            integer = tmp.toString();
-        }
-        return integer + decimal;
     }
 
     /**
      * Shows amount in UI.
      */
     private void showAmount(String amount) {
-        amountEditText.setText("€" + (amount.isEmpty() ? "0" : addThousandSeparator(amount)));
-    }
-
-    /**
-     * Checks whether the string has a comma.
-     */
-    private boolean hasComma(String text) {
-        for (int i = 0; i < text.length(); i++) {
-            if (text.charAt(i) == ',') {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Calculate the number of decimals of the string.
-     */
-    private int getNumDecimals(String num) {
-        if (!hasComma(num)) {
-            return 0;
-        }
-        return num.substring(num.indexOf(',') + 1, num.length()).length();
+        amountEditText.setText(amount.isEmpty() ? "0" : amount);
     }
 }

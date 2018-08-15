@@ -269,7 +269,7 @@ public class NumberKeyboard extends ConstraintLayout {
             keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_keyHeight, DEFAULT_KEY_HEIGHT_DP);
             // Get key padding
             keyPadding = array.getDimensionPixelSize(R.styleable.NumberKeyboard_keyPadding,
-                    dpToPx(DEFAULT_KEY_PADDING_DP));
+                    dpToPx(getContext(), DEFAULT_KEY_PADDING_DP));
             // Get number key background
             numberKeyBackground = array.getResourceId(R.styleable.NumberKeyboard_numberKeyBackground,
                     R.drawable.key_bg);
@@ -432,7 +432,7 @@ public class NumberKeyboard extends ConstraintLayout {
     /**
      * Utility method to convert dp to pixels.
      */
-    public int dpToPx(float valueInDp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, getResources().getDisplayMetrics());
+    public static int dpToPx(Context context, float valueInDp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, context.getResources().getDisplayMetrics());
     }
 }
