@@ -158,7 +158,6 @@ public class NumberKeyboardPopup {
                     }
 
                     keyboard.postDelayed(delayHidePopupRunnable, DELAY_HIDE_MS);
-                    dismiss();
                     context.getWindow().getDecorView().getViewTreeObserver().removeOnGlobalLayoutListener(onGlobalLayoutListener);
                 }
             }
