@@ -73,16 +73,14 @@ public class NumberKeyboardPopup {
         return size.y;
     }
 
-    private static Activity asActivity(@NonNull final Context context) {
-        Context result = context;
-
-        while (result instanceof ContextWrapper) {
-            if (result instanceof Activity) {
-                return (Activity) context;
-            }
-
-            result = ((ContextWrapper) context).getBaseContext();
-        }
+    @NonNull
+    private static Activity asActivity(Context cont) {
+        if (cont == null)
+            throw new IllegalArgumentException("The passed Context is not an Activity.");
+        else if (cont instanceof Activity)
+            return (Activity)cont;
+        else if (cont instanceof ContextWrapper)
+            return asActivity(((ContextWrapper)cont).getBaseContext());
 
         throw new IllegalArgumentException("The passed Context is not an Activity.");
     }
