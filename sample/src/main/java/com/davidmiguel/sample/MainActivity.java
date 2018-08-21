@@ -37,4 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, KeyboardPopupActivity.class);
         startActivity(intent);
     }
+
+    public void openKeyboardEditTextPopup(View view) {
+        Intent intent = new Intent(this, KeyboardEditTextPopupActivity.class);
+        startActivity(intent);
+    }
 }

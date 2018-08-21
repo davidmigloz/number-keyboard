@@ -183,7 +183,7 @@ public class NumberKeyboardPopup {
         }
     };
 
-    NumberKeyboardPopup(@NonNull final View rootView, @NonNull final EditText editText, int keyboardLayout) {
+    NumberKeyboardPopup(@NonNull final View rootView, @NonNull final EditText editText, int keyboardLayout, final boolean setEditTextListener) {
         this.context = asActivity(rootView.getContext());
         this.rootView = rootView.getRootView();
         this.editText = editText;
@@ -194,6 +194,10 @@ public class NumberKeyboardPopup {
             keyboard = (NumberKeyboard) context.getLayoutInflater().inflate(keyboardLayout, (ViewGroup)popupWindow.getContentView(), false);
         } else {
             keyboard = new NumberKeyboard(context);
+        }
+
+        if (setEditTextListener) {
+            keyboard.setEditText(editText);
         }
 
         popupWindow.setContentView(keyboard);
@@ -276,6 +280,7 @@ public class NumberKeyboardPopup {
         @Nullable private KeyboardShownListener onSoftKeyboardShownListener;
         @Nullable private NumberKeyboardListener onNumberKeyboardListener;
         @LayoutRes private int keyboardLayout;
+        private boolean doSetEditTextListener;
 
         public Builder(@NonNull final View rootView) {
             this.rootView = rootView;
@@ -311,14 +316,22 @@ public class NumberKeyboardPopup {
             return this;
         }
 
+        /**
+         * Pretend to be an IME and send key events to the edit text
+         * @return this builder instance
+         */
+        @CheckResult public Builder setEditTextListener() {
+            doSetEditTextListener = true;
+            return this;
+        }
+
         @CheckResult public NumberKeyboardPopup build(@NonNull final EditText editText) {
-            final NumberKeyboardPopup popup = new NumberKeyboardPopup(rootView, editText, keyboardLayout);
+            final NumberKeyboardPopup popup = new NumberKeyboardPopup(rootView, editText, keyboardLayout, doSetEditTextListener);
             popup.onPopupShownListener = onPopupShownListener;
             popup.onSoftKeyboardShowListener = onSoftKeyboardShownListener;
             popup.keyboard.setListener(onNumberKeyboardListener);
 
             return popup;
         }
-
     }
 }

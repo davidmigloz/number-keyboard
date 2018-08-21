@@ -124,6 +124,32 @@ numberKeyboard.setListener(new NumberKeyboardListener() {
 });
 ```
 
+#### "Fake IME" mode
+
+Instead of listening to keyboard events as shown in the last chapter, the NumberKeyboard can also be set up to
+send key events as an IME would. This means that no processing of events is necessary to get selection and deletion
+working.
+
+You can connect an EditText via
+
+```java
+numberKeyboard.editText = myEditText;
+
+// Or use with the popup like this:
+popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setEditTextListener();
+```
+
+You can combine this with setting a NumberKeyboardListener. To change which key sends the IME action, use these methods
+on the NumberKeyboard instance:
+
+```java
+// See the Javadoc of these functions for more information or the KeyboardEditTextPopupActivity sample.
+numberKeyboard.setLeftAuxButtonIsImeAction(true|false);
+numberKeyboard.setRightAuxBtnKeyEvent(KeyEvent.KEYCODE_COMMA);
+numberKeyboard.setModifierBtnKeyEvent(0, KeyEvent.KEYCODE_ENTER);
+```
+
+
 Take a look at the [sample app](https://github.com/davidmigloz/number-keyboard/tree/master/sample) to see the library working.
 
 ## Contributing

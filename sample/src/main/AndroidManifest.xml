@@ -21,6 +21,7 @@
         <activity android:name="com.davidmiguel.sample.KeyboardDecimalActivity" />
         <activity android:name="com.davidmiguel.sample.KeyboardFingerprintActivity" />
         <activity android:name="com.davidmiguel.sample.KeyboardCustomActivity" />
+        <activity android:name=".KeyboardEditTextPopupActivity" />
         <activity android:name=".KeyboardPopupActivity" />
 
     </application>
