@@ -162,6 +162,10 @@ public class NumberKeyboardPopup {
         }
     };
 
+    public PopupWindow getPopupWindow() {
+        return popupWindow;
+    }
+
     private Runnable delayHidePopupRunnable = new Runnable() {
 
         @Override
