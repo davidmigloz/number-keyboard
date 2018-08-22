@@ -141,6 +141,22 @@ public class NumberKeyboard extends ConstraintLayout {
     }
 
     /**
+     * Hides a modifier button.
+     * @param modifierIdx index of modifier key
+     */
+    public void hideModifierButton(final int modifierIdx) {
+        modifierKeys.get(modifierIdx).setVisibility(GONE);
+    }
+
+    /**
+     * Shows a modifier button.
+     * @param modifierIdx index of modifier key
+     */
+    public void showModifierButton(final int modifierIdx) {
+        modifierKeys.get(modifierIdx).setVisibility(VISIBLE);
+    }
+
+    /**
      * Sets left auxiliary button to send the IME action if EditText has been connected via
      * {@link #setEditText(EditText) setEditText}. Note that setting this to false
      * clears the key event that this button would send, so you need to set it via the

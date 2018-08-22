@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 ext.versionMajor = 3 // API Changes, adding big new feature, redesign the App
 ext.versionMinor = 0 // New features in a backwards-compatible manner
-ext.versionPatch = 2 // Backwards-compatible bug fixes
+ext.versionPatch = 3 // Backwards-compatible bug fixes
 ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 android {
