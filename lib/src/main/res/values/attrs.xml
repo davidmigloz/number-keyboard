@@ -28,6 +28,7 @@
         <attr name="leftAuxBtnBackground" format="reference"/>
         <attr name="rightAuxBtnIcon" format="reference"/>
         <attr name="rightAuxBtnBackground" format="reference"/>
+        <attr name="layout" format="reference"/>
     </declare-styleable>
 
 </resources>

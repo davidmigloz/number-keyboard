@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardPopup;
 
 import java.text.DecimalFormat;
@@ -81,6 +82,10 @@ public class KeyboardEditTextPopupActivity extends AppCompatActivity  {
         numberFormat.setMaximumFractionDigits(MAX_ALLOWED_DECIMALS);
 
         popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setEditTextListener().setKeyboardLayout(R.layout.popup_keyboard).build(amountEditText);
+
+        final NumberKeyboard keyboard = popup.getKeyboard();
+        keyboard.setNumberKeyBackground(0);
+        keyboard.setKeyPadding(0);
 
         amountEditText.setOnClickListener(new View.OnClickListener() {
             @Override

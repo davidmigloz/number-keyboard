@@ -265,12 +265,20 @@ public class NumberKeyboard extends ConstraintLayout {
      */
     public void setNumberKeyBackground(@DrawableRes int background) {
         for (TextView key : numericKeys) {
-            key.setBackground(ContextCompat.getDrawable(getContext(), background));
+            if (background == 0) {
+                key.setBackgroundResource(0);
+            } else {
+                key.setBackground(ContextCompat.getDrawable(getContext(), background));
+            }
         }
         if (modifierKeys != null) {
             for (View modifierKey : modifierKeys) {
                 if (modifierKey instanceof TextView) {
-                    modifierKey.setBackground(ContextCompat.getDrawable(getContext(), background));
+                    if (background == 0) {
+                        modifierKey.setBackgroundResource(0);
+                    } else {
+                        modifierKey.setBackground(ContextCompat.getDrawable(getContext(), background));
+                    }
                 }
             }
         }
@@ -413,6 +421,8 @@ public class NumberKeyboard extends ConstraintLayout {
                     leftAuxBtnBackground = R.drawable.key_bg;
                     rightAuxBtnBackground = R.drawable.key_bg;
             }
+            // Get layout ID
+            layoutId = array.getResourceId(R.styleable.NumberKeyboard_layout, layoutId);
         } finally {
             array.recycle();
         }

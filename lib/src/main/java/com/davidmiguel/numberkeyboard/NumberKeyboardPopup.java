@@ -166,6 +166,11 @@ public class NumberKeyboardPopup {
         return popupWindow;
     }
 
+    @NonNull
+    public NumberKeyboard getKeyboard() {
+        return keyboard;
+    }
+
     private Runnable delayHidePopupRunnable = new Runnable() {
 
         @Override
