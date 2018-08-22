@@ -1,6 +1,7 @@
 # Number Keyboard  [![](https://jitpack.io/v/davidmigloz/number-keyboard.svg)](https://jitpack.io/#davidmigloz/number-keyboard)
 
-Android library that provides a number keyboard view.
+Android library that provides a number keyboard view. You can either add the keyboard view into your layout or use a
+popup that overlays your real IME (soft keyboard).
 
 ![screenshot](img/screenshot.jpg)
 
@@ -44,6 +45,26 @@ Use `NumberKeyboard` view in your layout:
     ... />
 ```
 
+Or use a `NumberKeyboardPopup` to intercept the IME showing:
+
+```java
+    popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setNumberKeyboardListener(this).setKeyboardLayout(R.layout.popup_keyboard).build(myEditText);
+
+        myEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!popup.isShowing()) {
+                    // Show numpad, this will also open the IME if it is not open yet
+                    popup.toggle();
+                }
+            }
+        });
+```
+
+Please note that currently this will always also open the IME so that the back button is correctly set to the
+"down button" and that the numpad fake IME is the correct size. The first time that the IME shows might be faster
+than the numpad IME popup showing, so you might see it for a split second.
+
 #### Attributes
 
 - `keyboard:keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines the type of keyboard.
@@ -51,6 +72,7 @@ Use `NumberKeyboard` view in your layout:
   - `decimal`: numbers, comma and backspace keys.
   - `fingerprint`: numbers, fingerprint and backspace keys.
   - `custom`: numbers and defined auxiliary keys.
+  - `four_columns`: numbers and a fourth added column with comma, backspace, minus and enter
 - `keyboard:keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).      
 - `keyboard:keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
 - `keyboard:keyPadding="[dimension]"` (default: `16dp`): key padding.
@@ -96,8 +118,37 @@ numberKeyboard.setListener(new NumberKeyboardListener() {
 
      @Override
      public void onRightAuxButtonClicked() {...}
+     
+     @Override
+     public void onModifierButtonClicked(int number) {...}
 });
 ```
+
+#### "Fake IME" mode
+
+Instead of listening to keyboard events as shown in the last chapter, the NumberKeyboard can also be set up to
+send key events as an IME would. This means that no processing of events is necessary to get selection and deletion
+working.
+
+You can connect an EditText via
+
+```java
+numberKeyboard.editText = myEditText;
+
+// Or use with the popup like this:
+popup = new NumberKeyboardPopup.Builder(findViewById(R.id.main_view)).setEditTextListener();
+```
+
+You can combine this with setting a NumberKeyboardListener. To change which key sends the IME action, use these methods
+on the NumberKeyboard instance:
+
+```java
+// See the Javadoc of these functions for more information or the KeyboardEditTextPopupActivity sample.
+numberKeyboard.setLeftAuxButtonIsImeAction(true|false);
+numberKeyboard.setRightAuxBtnKeyEvent(KeyEvent.KEYCODE_COMMA);
+numberKeyboard.setModifierBtnKeyEvent(0, KeyEvent.KEYCODE_ENTER);
+```
+
 
 Take a look at the [sample app](https://github.com/davidmigloz/number-keyboard/tree/master/sample) to see the library working.
 
