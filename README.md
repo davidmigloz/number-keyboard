@@ -3,7 +3,7 @@
 Android library that provides a number keyboard view. You can either add the keyboard view into your layout or use a
 popup that overlays your real IME (soft keyboard).
 
-![screenshot](img/screenshot.jpg)
+![screenshot](img/screenshot.png)
 
 ## Usage
 
@@ -26,7 +26,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	compile 'com.github.davidmigloz:number-keyboard:2.0.1'
+	compile 'com.github.unverbraucht:number-keyboard:v3.0.3'
 }
 ```
 
@@ -67,7 +67,7 @@ than the numpad IME popup showing, so you might see it for a split second.
 
 #### Attributes
 
-- `keyboard:keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines the type of keyboard.
+- `keyboard:keyboardType="[integer|decimal|fingerprint|custom|four_columns]"` (required): defines the type of keyboard.
   - `integer`: numbers and backspace keys.
   - `decimal`: numbers, comma and backspace keys.
   - `fingerprint`: numbers, fingerprint and backspace keys.
@@ -76,7 +76,7 @@ than the numpad IME popup showing, so you might see it for a split second.
 - `keyboard:keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).      
 - `keyboard:keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
 - `keyboard:keyPadding="[dimension]"` (default: `16dp`): key padding.
-- `keyboard:numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
+- `keyboard:numberKeyBackground="[reference]"` (default: circle): number keys background drawable, 0 for none.
 - `keyboard:numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
 - `keyboard:leftAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in left auxiliary button.
 - `keyboard:leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
