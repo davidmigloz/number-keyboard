@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
-ext.versionMajor = 3 // API Changes, adding big new feature, redesign the App
+ext.versionMajor = 2 // API Changes, adding big new feature, redesign the App
 ext.versionMinor = 0 // New features in a backwards-compatible manner
-ext.versionPatch = 3 // Backwards-compatible bug fixes
+ext.versionPatch = 2 // Backwards-compatible bug fixes
 ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 android {
@@ -21,7 +21,7 @@ android {
 dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
-    api 'com.android.support.constraint:constraint-layout:1.1.2'
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
 }
 
 /**
