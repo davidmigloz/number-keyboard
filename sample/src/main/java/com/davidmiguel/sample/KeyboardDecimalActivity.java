@@ -69,6 +69,11 @@ public class KeyboardDecimalActivity extends AppCompatActivity implements Number
         updateAmount(newAmountText);
     }
 
+    @Override
+    public void onModifierButtonClicked(int number) {
+        // Keyboard has no modifier column
+    }
+
     /**
      * Update new entered amount if it is valid.
      */

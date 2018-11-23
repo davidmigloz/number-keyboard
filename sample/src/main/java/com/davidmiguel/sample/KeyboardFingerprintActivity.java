@@ -48,6 +48,11 @@ public class KeyboardFingerprintActivity extends AppCompatActivity implements Nu
         showAmount();
     }
 
+    @Override
+    public void onModifierButtonClicked(int number) {
+        // Keyboard has no modifiers
+    }
+
     private void showAmount() {
         amountEditText.setText(nf.format(amount));
     }
