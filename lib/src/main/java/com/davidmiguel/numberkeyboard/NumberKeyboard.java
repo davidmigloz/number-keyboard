@@ -557,7 +557,7 @@ public class NumberKeyboard extends ConstraintLayout {
     private void sendKeyEvent(final Integer keyEvent) {
         if (inputConnection != null) {
             //noinspection NumberEquality
-            if (keyEvent == KEY_EVENT_IS_IME_ACTION) {
+            if (KEY_EVENT_IS_IME_ACTION.equals(keyEvent)) {
                 EditText editTextRef = null;
                 // Preclude race conditions by using local
                 final WeakReference<EditText> currentWeakRef = editText;
