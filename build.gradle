@@ -1,11 +1,13 @@
+apply from: 'configurations.gradle'
+
 buildscript {
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        // Android Plugin for Gradle : https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        apply from: 'dependencies.gradle'
+        classpath gradleDependencies.androidGradle
     }
 }
 

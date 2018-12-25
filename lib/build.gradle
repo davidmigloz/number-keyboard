@@ -6,52 +6,22 @@ ext.versionPatch = 1 // Backwards-compatible bug fixes
 ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion androidConfig.compileSdkVersion
+    buildToolsVersion androidConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode generateVersionCode()
-        versionName generateVersionName()
+        minSdkVersion androidConfig.minSdkVersion
+        targetSdkVersion androidConfig.targetSdkVersion
+        versionCode generateVersionCode(versionMajor, versionMinor, versionPatch)
+        versionName generateVersionName(versionMajor, versionMinor, versionPatch, versionClassifier)
+        consumerProguardFiles 'proguard-rules.pro'
         vectorDrawables.useSupportLibrary = true
     }
 }
 
 dependencies {
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.core:core:1.0.1'
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.annotation:annotation:1.0.1'
-}
-
-/**
- * Build number (currently not available in JitPack).
- */
-private static Integer getBuildNumber() {
-    return System.getenv()["buildNumber"] as Integer ?: 0
-}
-
-/**
- * Version code: MMMmmppbbb
- */
-private Integer generateVersionCode() {
-    Integer versionCode = ext.versionMajor * 10000000 +
-            ext.versionMinor * 100000 +
-            ext.versionPatch * 1000 +
-            (getBuildNumber() % 1000)
-    println "Version code: " + versionCode
-    return versionCode
-}
-
-/**
- * Version name: <major>.<minor>.<patch>
- */
-private String generateVersionName() {
-    String versionName = "${ext.versionMajor}.${ext.versionMinor}.${ext.versionPatch}"
-    if (ext.versionClassifier != null) {
-        versionName += "-" + ext.versionClassifier
-    }
-    println "Version name: " + versionName
-    return versionName
+    api appDependencies.constraintLayout
+    implementation appDependencies.androidXCore
+    implementation appDependencies.appcompat
+    implementation appDependencies.annotations
 }

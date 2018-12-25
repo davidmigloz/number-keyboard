@@ -1,0 +1,42 @@
+ext {
+
+    javaVersion = JavaVersion.VERSION_1_8
+
+    androidConfig = [
+            buildToolsVersion: "28.0.3", // https://developer.android.com/studio/releases/build-tools
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+            compileSdkVersion: 28
+    ]
+
+    /**
+     * Build number (currently not available in JitPack).
+     */
+    getBuildNumber = { ->
+        return System.getenv()["buildNumber"] as Integer ?: 0
+    }
+
+    /**
+     * Version code: MMMmmppbbb
+     */
+    generateVersionCode = { versionMajor, versionMinor, versionPatch ->
+        Integer versionCode = versionMajor * 10000000 +
+                versionMinor * 100000 +
+                versionPatch * 1000 +
+                (getBuildNumber() % 1000)
+        println "Version code: " + versionCode
+        return versionCode
+    }
+
+    /**
+     * Version name: <major>.<minor>.<patch>[-<verClass>]
+     */
+    generateVersionName = { versionMajor, versionMinor, versionPatch, versionClassifier ->
+        String versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
+        if (versionClassifier != null) {
+            versionName += "-" + versionClassifier
+        }
+        println "Version name: " + versionName
+        return versionName
+    }
+}
