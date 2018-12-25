@@ -3,15 +3,17 @@ package com.davidmiguel.numberkeyboard;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.support.annotation.AttrRes;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Dimension;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatDelegate;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.Dimension;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatDelegate;
+
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
