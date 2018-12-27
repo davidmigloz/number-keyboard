@@ -219,57 +219,57 @@ public class NumberKeyboard extends ConstraintLayout {
                 attrs, R.styleable.NumberKeyboard, 0, 0);
         try {
             // Get keyboard type
-            int type = array.getInt(R.styleable.NumberKeyboard_keyboardType, -1);
+            int type = array.getInt(R.styleable.NumberKeyboard_numberkeyboard_keyboardType, -1);
             if (type == -1) {
                 throw new IllegalArgumentException("keyboardType attribute is required.");
             }
             // Get key sizes
-            keyWidth = array.getLayoutDimension(R.styleable.NumberKeyboard_keyWidth, DEFAULT_KEY_WIDTH_DP);
-            keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_keyHeight, DEFAULT_KEY_HEIGHT_DP);
+            keyWidth = array.getLayoutDimension(R.styleable.NumberKeyboard_numberkeyboard_keyWidth, DEFAULT_KEY_WIDTH_DP);
+            keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_numberkeyboard_keyHeight, DEFAULT_KEY_HEIGHT_DP);
             // Get key padding
-            keyPadding = array.getDimensionPixelSize(R.styleable.NumberKeyboard_keyPadding,
+            keyPadding = array.getDimensionPixelSize(R.styleable.NumberKeyboard_numberkeyboard_keyPadding,
                     dpToPx(DEFAULT_KEY_PADDING_DP));
             // Get number key background
-            numberKeyBackground = array.getResourceId(R.styleable.NumberKeyboard_numberKeyBackground,
-                    R.drawable.key_bg);
+            numberKeyBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyBackground,
+                    R.drawable.numberkeyboard_key_bg);
             // Get number key text color
-            numberKeyTextColor = array.getResourceId(R.styleable.NumberKeyboard_numberKeyTextColor,
-                    R.drawable.key_text_color);
+            numberKeyTextColor = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextColor,
+                    R.drawable.numberkeyboard_key_text_color);
             // Get auxiliary icons
             switch (type) {
                 case 0: // integer
-                    leftAuxBtnIcon = R.drawable.key_bg_transparent;
-                    rightAuxBtnIcon = R.drawable.ic_backspace;
-                    leftAuxBtnBackground = R.drawable.key_bg_transparent;
-                    rightAuxBtnBackground = R.drawable.key_bg_transparent;
+                    leftAuxBtnIcon = R.drawable.numberkeyboard_key_bg_transparent;
+                    rightAuxBtnIcon = R.drawable.numberkeyboard_ic_backspace;
+                    leftAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent;
+                    rightAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent;
                     break;
                 case 1: // decimal
-                    leftAuxBtnIcon = R.drawable.ic_comma;
-                    rightAuxBtnIcon = R.drawable.ic_backspace;
-                    leftAuxBtnBackground = R.drawable.key_bg;
-                    rightAuxBtnBackground = R.drawable.key_bg_transparent;
+                    leftAuxBtnIcon = R.drawable.numberkeyboard_ic_comma;
+                    rightAuxBtnIcon = R.drawable.numberkeyboard_ic_backspace;
+                    leftAuxBtnBackground = R.drawable.numberkeyboard_key_bg;
+                    rightAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent;
                     break;
                 case 2: // fingerprint
-                    leftAuxBtnIcon = R.drawable.ic_fingerprint;
-                    rightAuxBtnIcon = R.drawable.ic_backspace;
-                    leftAuxBtnBackground = R.drawable.key_bg_transparent;
-                    rightAuxBtnBackground = R.drawable.key_bg_transparent;
+                    leftAuxBtnIcon = R.drawable.numberkeyboard_ic_fingerprint;
+                    rightAuxBtnIcon = R.drawable.numberkeyboard_ic_backspace;
+                    leftAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent;
+                    rightAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent;
                     break;
                 case 3: // custom
-                    leftAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_leftAuxBtnIcon,
-                            R.drawable.key_bg_transparent);
-                    rightAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_rightAuxBtnIcon,
-                            R.drawable.key_bg_transparent);
-                    leftAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_leftAuxBtnBackground,
-                            R.drawable.key_bg_transparent);
-                    rightAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_rightAuxBtnBackground,
-                            R.drawable.key_bg_transparent);
+                    leftAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnIcon,
+                            R.drawable.numberkeyboard_key_bg_transparent);
+                    rightAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnIcon,
+                            R.drawable.numberkeyboard_key_bg_transparent);
+                    leftAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnBackground,
+                            R.drawable.numberkeyboard_key_bg_transparent);
+                    rightAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnBackground,
+                            R.drawable.numberkeyboard_key_bg_transparent);
                     break;
                 default:
-                    leftAuxBtnIcon = R.drawable.key_bg_transparent;
-                    rightAuxBtnIcon = R.drawable.key_bg_transparent;
-                    leftAuxBtnBackground = R.drawable.key_bg;
-                    rightAuxBtnBackground = R.drawable.key_bg;
+                    leftAuxBtnIcon = R.drawable.numberkeyboard_key_bg_transparent;
+                    rightAuxBtnIcon = R.drawable.numberkeyboard_key_bg_transparent;
+                    leftAuxBtnBackground = R.drawable.numberkeyboard_key_bg;
+                    rightAuxBtnBackground = R.drawable.numberkeyboard_key_bg;
             }
         } finally {
             array.recycle();
@@ -280,7 +280,7 @@ public class NumberKeyboard extends ConstraintLayout {
      * Inflates layout.
      */
     private void inflateView() {
-        View view = inflate(getContext(), R.layout.number_keyboard, this);
+        View view = inflate(getContext(), R.layout.numberkeyboard_layout, this);
         // Get numeric keys
         numericKeys = new ArrayList<>(10);
         numericKeys.add((TextView) view.findViewById(R.id.key0));
