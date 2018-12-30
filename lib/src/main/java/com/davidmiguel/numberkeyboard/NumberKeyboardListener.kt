@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.davidmiguel.numberkeyboard;
+package com.davidmiguel.numberkeyboard
 
 /**
  * Enables to listen keyboard events.
  */
-public interface NumberKeyboardListener {
+interface NumberKeyboardListener {
 
     /**
      * Invoked when a number key is clicked.
      */
-    void onNumberClicked(int number);
+    fun onNumberClicked(number: Int)
 
     /**
      * Invoked when the left auxiliary button is clicked.
      */
-    void onLeftAuxButtonClicked();
+    fun onLeftAuxButtonClicked()
 
     /**
      * Invoked when the right auxiliary button is clicked.
      */
-    void onRightAuxButtonClicked();
+    fun onRightAuxButtonClicked()
 }

@@ -30,6 +30,6 @@
         keyboard:numberkeyboard_leftAuxBtnBackground="@drawable/key_bg_square"
         keyboard:numberkeyboard_leftAuxBtnIcon="@drawable/ic_android"
         keyboard:numberkeyboard_numberKeyTextColor="@drawable/key_text_blue"
-        keyboard:numberkeyboard_rightAuxBtnIcon="@drawable/ic_android" />
+        keyboard:numberkeyboard_rightAuxBtnIcon="@drawable/numberkeyboard_ic_backspace" />
 
 </LinearLayout>

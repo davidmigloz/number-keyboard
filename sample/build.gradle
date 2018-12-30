@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 ext.versionMajor = 1 // API Changes, adding big new feature, redesign the App
 ext.versionMinor = 0 // New features in a backwards-compatible manner
@@ -29,4 +31,5 @@ dependencies {
     implementation project(':lib')
     implementation appDependencies.androidXCore
     implementation appDependencies.appcompat
+    implementation appDependencies.kotlinStdlib
 }

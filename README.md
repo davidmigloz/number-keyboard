@@ -25,7 +25,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	compile 'com.github.davidmigloz:number-keyboard:2.0.1'
+	compile 'com.github.davidmigloz:number-keyboard:3.0.0'
 }
 ```
 
@@ -40,26 +40,26 @@ Use `NumberKeyboard` view in your layout:
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:keyboard="http://schemas.android.com/apk/res-auto"
     ...
-    keyboard:keyboardType="integer"
+    keyboard:numberkeyboard_keyboardType="integer"
     ... />
 ```
 
 #### Attributes
 
-- `keyboard:keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines the type of keyboard.
+- `keyboard:numberkeyboard_keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines the type of keyboard.
   - `integer`: numbers and backspace keys.
   - `decimal`: numbers, comma and backspace keys.
   - `fingerprint`: numbers, fingerprint and backspace keys.
   - `custom`: numbers and defined auxiliary keys.
-- `keyboard:keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).      
-- `keyboard:keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
-- `keyboard:keyPadding="[dimension]"` (default: `16dp`): key padding.
-- `keyboard:numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
-- `keyboard:numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
-- `keyboard:leftAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in left auxiliary button.
-- `keyboard:leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
-- `keyboard:rightAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in right auxiliary button.
-- `keyboard:rightAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, right auxiliary button background.  
+- `keyboard:numberkeyboard_keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).
+- `keyboard:numberkeyboard_keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
+- `keyboard:numberkeyboard_keyPadding="[dimension]"` (default: `16dp`): key padding.
+- `keyboard:numberkeyboard_numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
+- `keyboard:numberkeyboard_numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
+- `keyboard:numberkeyboard_leftAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in left auxiliary button.
+- `keyboard:numberkeyboard_leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
+- `keyboard:numberkeyboard_rightAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in right auxiliary button.
+- `keyboard:numberkeyboard_rightAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, right auxiliary button background.
 
 #### Methods
 

@@ -1,5 +1,21 @@
 # Change Log
 
+## Version 3.0.0  *(30/12/2018)*
+
+- Migrate to Kotlin #21
+- Refactor support lib to AndroidX #13
+- Extract dependencies and configurations from build files #22
+- Add numberkeyboard_ resource prefix #23 (breaking change)
+
+### Migration
+
+Add the prefix `numberkeyboard_` to all the library attributes and resources.
+E.g.
+```
+Before:  keyboard:keyboardType="integer"
+Now:     keyboard:numberkeyboard_keyboardType="integer"
+```
+
 ## Version 2.0.1  *(23/04/2018)*
 
 - Fix layout issues when using dynamic height #10

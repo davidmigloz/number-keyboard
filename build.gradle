@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         apply from: 'dependencies.gradle'
         classpath gradleDependencies.androidGradle
+        classpath gradleDependencies.kotlinGradle
     }
 }
 
