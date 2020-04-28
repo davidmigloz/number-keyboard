@@ -24,6 +24,7 @@
         <attr name="numberkeyboard_numberKeyBackground" format="reference"/>
         <attr name="numberkeyboard_numberKeyTextColor" format="reference"/>
         <attr name="numberkeyboard_numberKeyTypeface" format="reference"/>
+        <attr name="numberkeyboard_numberKeyTextSize" format="dimension"/>
         <attr name="numberkeyboard_leftAuxBtnIcon" format="reference"/>
         <attr name="numberkeyboard_leftAuxBtnBackground" format="reference"/>
         <attr name="numberkeyboard_rightAuxBtnIcon" format="reference"/>
