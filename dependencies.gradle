@@ -5,9 +5,9 @@ ext {
     //----------------------------------------------------------------------------------------------
 
     // Android Plugin for Gradle : https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google | https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
-    androidGradle = '3.4.0-alpha08'
+    androidGradle = '4.0.0'
     // Kotlin version : https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
-    kotlin = '1.3.11'
+    kotlin = '1.3.72'
 
     gradleDependencies = [
             androidGradle: "com.android.tools.build:gradle:${androidGradle}",
