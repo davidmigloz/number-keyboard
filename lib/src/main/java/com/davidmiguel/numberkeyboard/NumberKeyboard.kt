@@ -7,13 +7,11 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorRes
-import androidx.annotation.Dimension
-import androidx.annotation.DrawableRes
+import androidx.annotation.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import java.util.*
 
 /**
@@ -32,6 +30,7 @@ class NumberKeyboard : ConstraintLayout {
     private var numberKeyBackground: Int = 0
     @ColorRes
     private var numberKeyTextColor: Int = 0
+    private var numberKeyTypeface: Typeface? = null
     @DrawableRes
     private var leftAuxBtnIcon: Int = 0
     @DrawableRes
@@ -210,6 +209,10 @@ class NumberKeyboard : ConstraintLayout {
             // Get number key text color
             numberKeyTextColor = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextColor,
                     R.drawable.numberkeyboard_key_text_color)
+            if (array.hasValue(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTypeface)) {
+                val fontId = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTypeface, -1)
+                numberKeyTypeface = ResourcesCompat.getFont(context, fontId)
+            }
             // Get auxiliary icons
             when (type) {
                 0 -> { // integer
@@ -287,6 +290,10 @@ class NumberKeyboard : ConstraintLayout {
         setKeyPadding(keyPadding)
         setNumberKeyBackground(numberKeyBackground)
         setNumberKeyTextColor(numberKeyTextColor)
+        val typeface = numberKeyTypeface
+        if (typeface != null) {
+            setNumberKeyTypeface(typeface)
+        }
         setLeftAuxButtonIcon(leftAuxBtnIcon)
         setLeftAuxButtonBackground(leftAuxBtnBackground)
         setRightAuxButtonIcon(rightAuxBtnIcon)
