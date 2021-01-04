@@ -2,191 +2,136 @@
 
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key1Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key4Container"
-        app:layout_constraintEnd_toStartOf="@+id/key2Container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/key1"
             style="@style/numberkeyboard_key"
-            android:text="@string/numberkeyboard_one" />
-
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key2Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key5Container"
-        app:layout_constraintEnd_toStartOf="@+id/key3Container"
-        app:layout_constraintStart_toEndOf="@+id/key1Container"
-        app:layout_constraintTop_toTopOf="parent">
+            android:text="@string/numberkeyboard_one"
+            app:layout_constraintBottom_toTopOf="@+id/key4"
+            app:layout_constraintEnd_toStartOf="@+id/key2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/key2"
             style="@style/numberkeyboard_key"
-            android:text="@string/numberkeyboard_two" />
+            android:text="@string/numberkeyboard_two"
+            app:layout_constraintBottom_toTopOf="@+id/key5"
+            app:layout_constraintEnd_toStartOf="@+id/key3"
+            app:layout_constraintStart_toEndOf="@+id/key1"
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key3Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key6Container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/key2Container"
-        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/key3"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/key6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/key2"
+            app:layout_constraintTop_toTopOf="parent"
             android:text="@string/numberkeyboard_three" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key4Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key7Container"
-        app:layout_constraintEnd_toStartOf="@+id/key5Container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/key1Container">
 
         <TextView
             android:id="@+id/key4"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/key7"
+            app:layout_constraintEnd_toStartOf="@+id/key5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/key1"
             android:text="@string/numberkeyboard_four" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key5Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key8Container"
-        app:layout_constraintEnd_toStartOf="@+id/key6Container"
-        app:layout_constraintStart_toEndOf="@+id/key4Container"
-        app:layout_constraintTop_toBottomOf="@+id/key2Container">
 
         <TextView
             android:id="@+id/key5"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/key8"
+            app:layout_constraintEnd_toStartOf="@+id/key6"
+            app:layout_constraintStart_toEndOf="@+id/key4"
+            app:layout_constraintTop_toBottomOf="@+id/key2"
             android:text="@string/numberkeyboard_five" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key6Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key9Container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/key5Container"
-        app:layout_constraintTop_toBottomOf="@+id/key3Container">
 
         <TextView
             android:id="@+id/key6"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/key9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/key5"
+            app:layout_constraintTop_toBottomOf="@+id/key3"
             android:text="@string/numberkeyboard_six" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key7Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/leftAuxBtnContainer"
-        app:layout_constraintEnd_toStartOf="@+id/key8Container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/key4Container">
 
         <TextView
             android:id="@+id/key7"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/leftAuxBtnContainer"
+            app:layout_constraintEnd_toStartOf="@+id/key8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/key4"
             android:text="@string/numberkeyboard_seven" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
 
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key8Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/key0Container"
-        app:layout_constraintEnd_toStartOf="@+id/key9Container"
-        app:layout_constraintStart_toEndOf="@+id/key7Container"
-        app:layout_constraintTop_toBottomOf="@+id/key5Container">
+
 
         <TextView
             android:id="@+id/key8"
             style="@style/numberkeyboard_key"
-            android:text="@string/numberkeyboard_eight" />
+            android:text="@string/numberkeyboard_eight"
+            app:layout_constraintBottom_toTopOf="@+id/key0"
+            app:layout_constraintEnd_toStartOf="@+id/key9"
+            app:layout_constraintStart_toEndOf="@+id/key7"
+            app:layout_constraintTop_toBottomOf="@+id/key5"/>
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key9Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toTopOf="@+id/rightAuxBtnContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/key8Container"
-        app:layout_constraintTop_toBottomOf="@+id/key6Container">
 
         <TextView
             android:id="@+id/key9"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toTopOf="@+id/rightAuxBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/key8"
+            app:layout_constraintTop_toBottomOf="@+id/key6"
             android:text="@string/numberkeyboard_nine" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/leftAuxBtnContainer"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/key0Container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/key7Container">
 
         <ImageView
             android:id="@+id/leftAuxBtn"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/key0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/key7"
             android:scaleType="center"
             app:srcCompat="@drawable/numberkeyboard_ic_fingerprint" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
-
-
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/key0Container"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightAuxBtnContainer"
-        app:layout_constraintStart_toEndOf="@+id/leftAuxBtnContainer"
-        app:layout_constraintTop_toBottomOf="@+id/key8Container">
 
         <TextView
             android:id="@+id/key0"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightAuxBtn"
+            app:layout_constraintStart_toEndOf="@+id/leftAuxBtn"
+            app:layout_constraintTop_toBottomOf="@+id/key8"
             android:text="@string/numberkeyboard_zero" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 
-    <com.davidmiguel.numberkeyboard.SquareFrameLayout
-        android:id="@+id/rightAuxBtnContainer"
-        style="@style/numberkeyboard_keyContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/key0Container"
-        app:layout_constraintTop_toBottomOf="@+id/key9Container">
+
 
         <ImageView
             android:id="@+id/rightAuxBtn"
             style="@style/numberkeyboard_key"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/key0"
+            app:layout_constraintTop_toBottomOf="@+id/key9"
             android:scaleType="center"
             app:srcCompat="@drawable/numberkeyboard_ic_backspace" />
 
-    </com.davidmiguel.numberkeyboard.SquareFrameLayout>
 </merge>
