@@ -70,7 +70,7 @@
         <TextView
             android:id="@+id/key7"
             style="@style/numberkeyboard_key"
-            app:layout_constraintBottom_toTopOf="@+id/leftAuxBtnContainer"
+            app:layout_constraintBottom_toTopOf="@+id/leftAuxBtn"
             app:layout_constraintEnd_toStartOf="@+id/key8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/key4"
@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toStartOf="@+id/key0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/key7"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/numberkeyboard_ic_fingerprint" />
 
 
@@ -131,7 +131,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/key0"
             app:layout_constraintTop_toBottomOf="@+id/key9"
-            android:scaleType="center"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/numberkeyboard_ic_backspace" />
 
 </merge>
