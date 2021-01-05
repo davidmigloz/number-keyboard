@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -11,8 +11,10 @@
             android:text="@string/numberkeyboard_one"
             app:layout_constraintBottom_toTopOf="@+id/key4"
             app:layout_constraintEnd_toStartOf="@+id/key2"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/key2"
@@ -22,62 +24,60 @@
             app:layout_constraintEnd_toStartOf="@+id/key3"
             app:layout_constraintStart_toEndOf="@+id/key1"
             app:layout_constraintTop_toTopOf="parent"
-            />
-
+            app:layout_constraintVertical_chainStyle="packed" />
 
 
         <TextView
             android:id="@+id/key3"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_three"
             app:layout_constraintBottom_toTopOf="@+id/key6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/key2"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/numberkeyboard_three" />
+            app:layout_constraintVertical_chainStyle="packed" />
 
 
         <TextView
             android:id="@+id/key4"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_four"
             app:layout_constraintBottom_toTopOf="@+id/key7"
             app:layout_constraintEnd_toStartOf="@+id/key5"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/key1"
-            android:text="@string/numberkeyboard_four" />
+            app:layout_constraintTop_toBottomOf="@+id/key1" />
 
 
         <TextView
             android:id="@+id/key5"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_five"
             app:layout_constraintBottom_toTopOf="@+id/key8"
             app:layout_constraintEnd_toStartOf="@+id/key6"
             app:layout_constraintStart_toEndOf="@+id/key4"
-            app:layout_constraintTop_toBottomOf="@+id/key2"
-            android:text="@string/numberkeyboard_five" />
-
+            app:layout_constraintTop_toBottomOf="@+id/key2" />
 
 
         <TextView
             android:id="@+id/key6"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_six"
             app:layout_constraintBottom_toTopOf="@+id/key9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/key5"
-            app:layout_constraintTop_toBottomOf="@+id/key3"
-            android:text="@string/numberkeyboard_six" />
+            app:layout_constraintTop_toBottomOf="@+id/key3" />
 
 
         <TextView
             android:id="@+id/key7"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_seven"
             app:layout_constraintBottom_toTopOf="@+id/leftAuxBtn"
             app:layout_constraintEnd_toStartOf="@+id/key8"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/key4"
-            android:text="@string/numberkeyboard_seven" />
-
-
-
+            app:layout_constraintTop_toBottomOf="@+id/key4" />
 
 
         <TextView
@@ -87,51 +87,49 @@
             app:layout_constraintBottom_toTopOf="@+id/key0"
             app:layout_constraintEnd_toStartOf="@+id/key9"
             app:layout_constraintStart_toEndOf="@+id/key7"
-            app:layout_constraintTop_toBottomOf="@+id/key5"/>
+            app:layout_constraintTop_toBottomOf="@+id/key5" />
 
 
         <TextView
             android:id="@+id/key9"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_nine"
             app:layout_constraintBottom_toTopOf="@+id/rightAuxBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/key8"
-            app:layout_constraintTop_toBottomOf="@+id/key6"
-            android:text="@string/numberkeyboard_nine" />
-
+            app:layout_constraintTop_toBottomOf="@+id/key6" />
 
 
         <ImageView
             android:id="@+id/leftAuxBtn"
             style="@style/numberkeyboard_key"
+            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/key0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/key7"
-            android:scaleType="center"
             app:srcCompat="@drawable/numberkeyboard_ic_fingerprint" />
 
 
         <TextView
             android:id="@+id/key0"
             style="@style/numberkeyboard_key"
+            android:text="@string/numberkeyboard_zero"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/rightAuxBtn"
             app:layout_constraintStart_toEndOf="@+id/leftAuxBtn"
-            app:layout_constraintTop_toBottomOf="@+id/key8"
-            android:text="@string/numberkeyboard_zero" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/key8" />
 
 
         <ImageView
             android:id="@+id/rightAuxBtn"
             style="@style/numberkeyboard_key"
+            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/key0"
             app:layout_constraintTop_toBottomOf="@+id/key9"
-            android:scaleType="center"
             app:srcCompat="@drawable/numberkeyboard_ic_backspace" />
 
-</merge>
+</androidx.constraintlayout.widget.ConstraintLayout>
