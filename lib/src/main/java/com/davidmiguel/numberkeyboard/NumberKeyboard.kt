@@ -322,8 +322,8 @@ class NumberKeyboard : ConstraintLayout {
 
     companion object {
 
-        private const val DEFAULT_KEY_WIDTH_DP = -1 // match_parent
-        private const val DEFAULT_KEY_HEIGHT_DP = -1 // match_parent
+        private const val DEFAULT_KEY_WIDTH_DP = 55
+        private const val DEFAULT_KEY_HEIGHT_DP = 55
         private const val DEFAULT_KEY_PADDING_DP = 16
 
         init {
