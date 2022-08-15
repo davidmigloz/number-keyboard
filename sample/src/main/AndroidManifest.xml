@@ -21,8 +21,9 @@
         <activity android:name="com.davidmiguel.sample.KeyboardIntegerActivity" />
         <activity android:name="com.davidmiguel.sample.KeyboardDecimalActivity" />
         <activity android:name="com.davidmiguel.sample.KeyboardFingerprintActivity" />
+        <activity android:name="com.davidmiguel.sample.KeyboardCustomActivity" />
         <activity
-            android:name="com.davidmiguel.sample.KeyboardCustomActivity"
+            android:name="com.davidmiguel.sample.KeyboardCustomSquareActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -32,7 +33,7 @@
 
                 <data
                     android:host="com.davidmiguel.sample"
-                    android:pathPattern="/KeyboardCustomActivity"
+                    android:pathPattern="/KeyboardCustomSquareActivity"
                     android:scheme="https" />
             </intent-filter>
         </activity>

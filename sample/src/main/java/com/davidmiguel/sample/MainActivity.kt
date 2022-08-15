@@ -2,8 +2,8 @@ package com.davidmiguel.sample
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
     fun openKeyboardCustom(view: View) {
         val intent = Intent(this, KeyboardCustomActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun openKeyboardCustomSquare(view: View) {
+        val intent = Intent(this, KeyboardCustomSquareActivity::class.java)
         startActivity(intent)
     }
 }

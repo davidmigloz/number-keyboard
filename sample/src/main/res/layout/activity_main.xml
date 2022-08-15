@@ -44,5 +44,13 @@
             android:padding="30dp"
             android:text="Custom" />
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="openKeyboardCustomSquare"
+            android:padding="30dp"
+            android:text="Custom Square" />
+
     </LinearLayout>
 </RelativeLayout>
