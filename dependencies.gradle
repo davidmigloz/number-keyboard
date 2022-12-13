@@ -5,9 +5,9 @@ ext {
     //----------------------------------------------------------------------------------------------
 
     // Android Plugin for Gradle : https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google | https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
-    androidGradle = '7.2.2'
+    androidGradle = '7.3.1'
     // Kotlin version : https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
-    kotlin = '1.7.10'
+    kotlin = '1.7.22'
 
     gradleDependencies = [
             androidGradle: "com.android.tools.build:gradle:${androidGradle}",
@@ -19,11 +19,11 @@ ext {
     //----------------------------------------------------------------------------------------------
 
     // AndroidX Core : https://mvnrepository.com/artifact/androidx.core/core | https://developer.android.com/jetpack/androidx/androidx-rn
-    androidXCore = "1.8.0"
+    androidXCore = "1.9.0"
     // AppCompat : https://mvnrepository.com/artifact/androidx.appcompat/appcompat | https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
-    appcompat = '1.4.2'
+    appcompat = '1.5.1'
     // Android Annotations : https://mvnrepository.com/artifact/androidx.annotation/annotation?repo=google | https://developer.android.com/topic/libraries/support-library/packages#annotations
-    annotations = "1.4.0"
+    annotations = "1.5.0"
     // ConstraintLayout : https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout
     constraintLayout = '2.1.4'
 
@@ -53,7 +53,7 @@ ext {
     // JUnit (unit testing framework) : https://mvnrepository.com/artifact/junit/junit | http://junit.org/junit4/
     junit = '4.13.2'
     // Mockito (mocking framework) : https://mvnrepository.com/artifact/org.mockito/mockito-core | http://site.mockito.org/
-    mockito = '4.6.1'
+    mockito = '4.9.0'
 
     testDependencies = [
             junit  : "junit:junit:${junit}",

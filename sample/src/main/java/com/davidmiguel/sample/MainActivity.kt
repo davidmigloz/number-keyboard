@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_PARAMETER")
+
 package com.davidmiguel.sample
 
 import android.content.Intent
