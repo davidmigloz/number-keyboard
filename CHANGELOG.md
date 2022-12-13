@@ -1,5 +1,12 @@
 # Change Log
 
+## Version 3.1.0  *(13/12/2022)*
+
+- Add text size attribute (thanks @gerynugrh)
+- Add typeface attribute (thanks @gerynugrh)
+- Add KeyboardCustomSquareActivity to show custom square design (thanks @delacrixmorgan)
+- Update dependencies
+
 ## Version 3.0.0  *(30/12/2018)*
 
 - Migrate to Kotlin #21

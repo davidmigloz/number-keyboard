@@ -7,11 +7,15 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.*
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorRes
+import androidx.annotation.Dimension
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.TextViewCompat
 import java.util.*
 
 /**
@@ -22,23 +26,32 @@ class NumberKeyboard : ConstraintLayout {
 
     @Dimension
     private var keyWidth: Int = 0
+
     @Dimension
     private var keyHeight: Int = 0
+
     @Dimension
     private var keyPadding: Int = 0
+
     @DrawableRes
     private var numberKeyBackground: Int = 0
+
     @ColorRes
     private var numberKeyTextColor: Int = 0
     private var numberKeyTypeface: Typeface? = null
+
     @Dimension
-    private var numberKeyTextSize: Float = 0.0F
+    private var numberKeyTextSize: Float? = null
+
     @DrawableRes
     private var leftAuxBtnIcon: Int = 0
+
     @DrawableRes
     private var leftAuxBtnBackground: Int = 0
+
     @DrawableRes
     private var rightAuxBtnIcon: Int = 0
+
     @DrawableRes
     private var rightAuxBtnBackground: Int = 0
 
@@ -57,7 +70,9 @@ class NumberKeyboard : ConstraintLayout {
         inflateView()
     }
 
-    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, @AttrRes defStyleAttr: Int) : super(
+        context, attrs, defStyleAttr
+    ) {
         initializeAttributes(attrs)
         inflateView()
     }
@@ -163,11 +178,14 @@ class NumberKeyboard : ConstraintLayout {
     }
 
     /**
-     * Sets number keys text size.
+     * Sets number keys text size in pixels.
      */
     fun setNumberKeyTextSize(size: Float) {
         for (key in numericKeys) {
-            key.textSize = size
+            key.setTextSize(TypedValue.COMPLEX_UNIT_PX, size)
+            TextViewCompat.setAutoSizeTextTypeWithDefaults(
+                key, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE
+            )
         }
     }
 
@@ -209,23 +227,39 @@ class NumberKeyboard : ConstraintLayout {
             val type = array.getInt(R.styleable.NumberKeyboard_numberkeyboard_keyboardType, -1)
             if (type == -1) throw IllegalArgumentException("keyboardType attribute is required.")
             // Get key sizes
-            keyWidth = array.getLayoutDimension(R.styleable.NumberKeyboard_numberkeyboard_keyWidth, DEFAULT_KEY_WIDTH_DP)
-            keyHeight = array.getLayoutDimension(R.styleable.NumberKeyboard_numberkeyboard_keyHeight, DEFAULT_KEY_HEIGHT_DP)
+            keyWidth = array.getLayoutDimension(
+                R.styleable.NumberKeyboard_numberkeyboard_keyWidth,
+                DEFAULT_KEY_WIDTH_DP,
+            )
+            keyHeight = array.getLayoutDimension(
+                R.styleable.NumberKeyboard_numberkeyboard_keyHeight,
+                DEFAULT_KEY_HEIGHT_DP,
+            )
             // Get key padding
-            keyPadding = array.getDimensionPixelSize(R.styleable.NumberKeyboard_numberkeyboard_keyPadding,
-                    dpToPx(DEFAULT_KEY_PADDING_DP.toFloat()))
+            keyPadding = array.getDimensionPixelSize(
+                R.styleable.NumberKeyboard_numberkeyboard_keyPadding,
+                dpToPx(DEFAULT_KEY_PADDING_DP.toFloat()),
+            )
             // Get number key background
-            numberKeyBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyBackground,
-                    R.drawable.numberkeyboard_key_bg)
+            numberKeyBackground = array.getResourceId(
+                R.styleable.NumberKeyboard_numberkeyboard_numberKeyBackground,
+                R.drawable.numberkeyboard_key_bg,
+            )
             // Get number key text color
-            numberKeyTextColor = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextColor,
-                    R.drawable.numberkeyboard_key_text_color)
-            if (array.hasValue(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTypeface)) {
-                val fontId = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTypeface, -1)
-                numberKeyTypeface = ResourcesCompat.getFont(context, fontId)
-            }
-            numberKeyTextSize = array.getDimension(R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextSize,
-                    DEFAULT_KEY_TEXT_SIZE_SP)
+            numberKeyTextColor = array.getResourceId(
+                R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextColor,
+                R.drawable.numberkeyboard_key_text_color,
+            )
+            // Get typeface
+            numberKeyTypeface = array.getResourceId(
+                R.styleable.NumberKeyboard_numberkeyboard_numberKeyTypeface,
+                -1,
+            ).takeIf { it >= 0 }?.let { ResourcesCompat.getFont(context, it) }
+            // Get text size
+            numberKeyTextSize = array.getDimensionPixelSize(
+                R.styleable.NumberKeyboard_numberkeyboard_numberKeyTextSize,
+                -1,
+            ).takeIf { it >= 0 }?.toFloat()
             // Get auxiliary icons
             when (type) {
                 0 -> { // integer
@@ -247,14 +281,22 @@ class NumberKeyboard : ConstraintLayout {
                     rightAuxBtnBackground = R.drawable.numberkeyboard_key_bg_transparent
                 }
                 3 -> { // custom
-                    leftAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnIcon,
-                            R.drawable.numberkeyboard_key_bg_transparent)
-                    rightAuxBtnIcon = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnIcon,
-                            R.drawable.numberkeyboard_key_bg_transparent)
-                    leftAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnBackground,
-                            R.drawable.numberkeyboard_key_bg_transparent)
-                    rightAuxBtnBackground = array.getResourceId(R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnBackground,
-                            R.drawable.numberkeyboard_key_bg_transparent)
+                    leftAuxBtnIcon = array.getResourceId(
+                        R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnIcon,
+                        R.drawable.numberkeyboard_key_bg_transparent
+                    )
+                    rightAuxBtnIcon = array.getResourceId(
+                        R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnIcon,
+                        R.drawable.numberkeyboard_key_bg_transparent
+                    )
+                    leftAuxBtnBackground = array.getResourceId(
+                        R.styleable.NumberKeyboard_numberkeyboard_leftAuxBtnBackground,
+                        R.drawable.numberkeyboard_key_bg_transparent
+                    )
+                    rightAuxBtnBackground = array.getResourceId(
+                        R.styleable.NumberKeyboard_numberkeyboard_rightAuxBtnBackground,
+                        R.drawable.numberkeyboard_key_bg_transparent
+                    )
                 }
                 else -> {
                     leftAuxBtnIcon = R.drawable.numberkeyboard_key_bg_transparent
@@ -303,11 +345,8 @@ class NumberKeyboard : ConstraintLayout {
         setKeyPadding(keyPadding)
         setNumberKeyBackground(numberKeyBackground)
         setNumberKeyTextColor(numberKeyTextColor)
-        val typeface = numberKeyTypeface
-        if (typeface != null) {
-            setNumberKeyTypeface(typeface)
-        }
-        setNumberKeyTextSize(numberKeyTextSize)
+        numberKeyTypeface?.let { setNumberKeyTypeface(it) }
+        numberKeyTextSize?.let { setNumberKeyTextSize(it) }
         setLeftAuxButtonIcon(leftAuxBtnIcon)
         setLeftAuxButtonBackground(leftAuxBtnBackground)
         setRightAuxButtonIcon(rightAuxBtnIcon)
@@ -338,7 +377,9 @@ class NumberKeyboard : ConstraintLayout {
      * Utility method to convert dp to pixels.
      */
     fun dpToPx(valueInDp: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, resources.displayMetrics).toInt()
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP, valueInDp, resources.displayMetrics
+        ).toInt()
     }
 
     companion object {
@@ -346,7 +387,6 @@ class NumberKeyboard : ConstraintLayout {
         private const val DEFAULT_KEY_WIDTH_DP = -1 // match_parent
         private const val DEFAULT_KEY_HEIGHT_DP = -1 // match_parent
         private const val DEFAULT_KEY_PADDING_DP = 16
-        private const val DEFAULT_KEY_TEXT_SIZE_SP = 18.0F
 
         init {
             AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)

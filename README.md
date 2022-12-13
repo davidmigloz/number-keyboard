@@ -25,7 +25,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	compile 'com.github.davidmigloz:number-keyboard:3.0.0'
+	compile 'com.github.davidmigloz:number-keyboard:3.1.0'
 }
 ```
 
@@ -56,7 +56,9 @@ Use `NumberKeyboard` view in your layout:
 - `keyboard:numberkeyboard_keyPadding="[dimension]"` (default: `16dp`): key padding.
 - `keyboard:numberkeyboard_numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
 - `keyboard:numberkeyboard_numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
-- `keyboard:numberkeyboard_leftAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in left auxiliary button.
+- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: dark blue): number keys text color.
+- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: none): number keys text typeface.
+- `keyboard:numberkeyboard_numberKeyTextSize="[dimension]"` (default: none): number keys text size (if it is not set, the text auto scales to fit the key).
 - `keyboard:numberkeyboard_leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
 - `keyboard:numberkeyboard_rightAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in right auxiliary button.
 - `keyboard:numberkeyboard_rightAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, right auxiliary button background.
@@ -73,6 +75,7 @@ Use `NumberKeyboard` view in your layout:
 - `setNumberKeyBackground()`: sets number keys background.
 - `setNumberKeyTextColor()`: sets number keys text color.
 - `setNumberKeyTypeface()`: sets number keys text typeface.
+- `setNumberKeyTextSize()`: sets number keys text size in pixels.
 - `setLeftAuxButtonIcon()`: sets left auxiliary button icon.
 - `setRightAuxButtonIcon()`: sets right auxiliary button icon.
 - `setLeftAuxButtonBackground()`: sets left auxiliary button background.
