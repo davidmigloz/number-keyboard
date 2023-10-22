@@ -1,11 +1,11 @@
 ext {
-
-    javaVersion = JavaVersion.VERSION_1_8
+    javaVersion = JavaVersion.VERSION_18
+    jvmToolchainVersion = 18
 
     androidConfig = [
-            minSdkVersion    : 19,
-            targetSdkVersion : 33,
-            compileSdkVersion: 33
+            minSdkVersion    : 21,
+            targetSdkVersion : 34,
+            compileSdkVersion: 34
     ]
 
     /**

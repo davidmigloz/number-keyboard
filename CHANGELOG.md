@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.0  *(XX/XX/2023)*
+
+- Revamped Number Keyboard to Compose #37
+
 ## Version 3.1.0  *(13/12/2022)*
 
 - Add text size attribute (thanks @gerynugrh)

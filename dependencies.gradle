@@ -1,62 +1,22 @@
 ext {
-
     //----------------------------------------------------------------------------------------------
     // Gradle Dependencies
     //----------------------------------------------------------------------------------------------
 
     // Android Plugin for Gradle : https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google | https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
-    androidGradle = '7.3.1'
-    // Kotlin version : https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
-    kotlin = '1.7.22'
-
-    gradleDependencies = [
-            androidGradle: "com.android.tools.build:gradle:${androidGradle}",
-            kotlinGradle : "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin}",
-    ]
+    androidGradle = '8.1.2'
+    // Kotlin : https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
+    // Kotlin Compose Compatibility Map : https://developer.android.com/jetpack/androidx/releases/compose-kotlin
+    kotlin = '1.9.10'
+    // Compose Compiler : https://developer.android.com/jetpack/androidx/releases/compose-compiler
+    composeCompiler = '1.5.3'
 
     //----------------------------------------------------------------------------------------------
     // App Dependencies
     //----------------------------------------------------------------------------------------------
 
-    // AndroidX Core : https://mvnrepository.com/artifact/androidx.core/core | https://developer.android.com/jetpack/androidx/androidx-rn
-    androidXCore = "1.9.0"
-    // AppCompat : https://mvnrepository.com/artifact/androidx.appcompat/appcompat | https://developer.android.com/topic/libraries/support-library/packages#v7-appcompat
-    appcompat = '1.5.1'
-    // Android Annotations : https://mvnrepository.com/artifact/androidx.annotation/annotation?repo=google | https://developer.android.com/topic/libraries/support-library/packages#annotations
-    annotations = "1.5.0"
-    // ConstraintLayout : https://mvnrepository.com/artifact/androidx.constraintlayout/constraintlayout
-    constraintLayout = '2.1.4'
-
-    appDependencies = [
-            androidXCore    : "androidx.core:core:${androidXCore}",
-            appcompat       : "androidx.appcompat:appcompat:${appcompat}",
-            annotations     : "androidx.annotation:annotation:${annotations}",
-            constraintLayout: "androidx.constraintlayout:constraintlayout:${constraintLayout}",
-            kotlinStdlib    : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin}",
-    ]
-
-    //----------------------------------------------------------------------------------------------
-    // Debug Dependencies
-    //----------------------------------------------------------------------------------------------
-
-    // Timber (logger) : https://mvnrepository.com/artifact/com.jakewharton.timber/timber | https://github.com/JakeWharton/timber
-    timber = '5.0.1'
-
-    debugDependencies = [
-            timber: "com.jakewharton.timber:timber:${timber}",
-    ]
-
-    //----------------------------------------------------------------------------------------------
-    // Test Dependencies
-    //----------------------------------------------------------------------------------------------
-
-    // JUnit (unit testing framework) : https://mvnrepository.com/artifact/junit/junit | http://junit.org/junit4/
-    junit = '4.13.2'
-    // Mockito (mocking framework) : https://mvnrepository.com/artifact/org.mockito/mockito-core | http://site.mockito.org/
-    mockito = '4.9.0'
-
-    testDependencies = [
-            junit  : "junit:junit:${junit}",
-            mockito: "org.mockito:mockito-core:${mockito}",
-    ]
+    // Compose Bill of Materials : https://mvnrepository.com/artifact/androidx.compose/compose-bom
+    composeBoM = "2023.10.01"
+    // Compose Navigation : https://developer.android.com/jetpack/compose/navigation
+    composeNav = '2.7.5'
 }
