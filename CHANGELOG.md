@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.1  *(03/11/2023)*
+
+- Fix JitPack build
+
 ## Version 4.0.0  *(03/11/2023)*
 
 - Revamped Number Keyboard to Compose #37 (thanks @delacrixmorgan!)
