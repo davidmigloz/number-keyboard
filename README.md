@@ -31,6 +31,8 @@ dependencies {
 
 [CHANGELOG](https://github.com/davidmigloz/number-keyboard/blob/master/CHANGELOG.md)
 
+> **Note:** in v4.0.0 the library was migrated to Jetpack Compose. If you need to old Android View based version, please keep using v3.1.0 instead.
+
 #### Step 3
 
 Use `NumberKeyboard` composable in your layout:
