@@ -1,41 +1,98 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package com.davidmiguel.sample
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.AttachMoney
+import androidx.compose.material.icons.rounded.DashboardCustomize
+import androidx.compose.material.icons.rounded.Fingerprint
+import androidx.compose.material.icons.rounded.Numbers
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.core.view.WindowCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.davidmiguel.sample.theme.AppTheme
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        setContent {
+            AppTheme {
+                val navController = rememberNavController()
+                Scaffold(bottomBar = { NavigationBar(navController) }) { innerPadding ->
+                    NavHost(navController = navController, startDestination = BottomNavItem.Integer.route) {
+                        composable(BottomNavItem.Integer.route) { IntegerScreen(innerPadding) }
+                        composable(BottomNavItem.Decimal.route) { DecimalScreen(innerPadding) }
+                        composable(BottomNavItem.Biometric.route) { BiometricScreen(innerPadding) }
+                        composable(BottomNavItem.Custom.route) { CustomScreen(innerPadding) }
+                    }
+                }
+            }
+        }
     }
+}
 
-    fun openKeyboardInteger(view: View) {
-        val intent = Intent(this, KeyboardIntegerActivity::class.java)
-        startActivity(intent)
-    }
+@Composable
+private fun NavigationBar(navController: NavController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
 
-    fun openKeyboardDecimal(view: View) {
-        val intent = Intent(this, KeyboardDecimalActivity::class.java)
-        startActivity(intent)
+    NavigationBar {
+        BottomNavItem.values().forEach { screen ->
+            NavigationBarItem(
+                icon = { Icon(screen.icon, contentDescription = screen.title) },
+                label = { Text(screen.title) },
+                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                onClick = {
+                    navController.navigate(screen.route) {
+                        popUpTo(navController.graph.findStartDestination().id) { saveState = true }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
+        }
     }
+}
 
-    fun openKeyboardFingerprint(view: View) {
-        val intent = Intent(this, KeyboardFingerprintActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun openKeyboardCustom(view: View) {
-        val intent = Intent(this, KeyboardCustomActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun openKeyboardCustomSquare(view: View) {
-        val intent = Intent(this, KeyboardCustomSquareActivity::class.java)
-        startActivity(intent)
-    }
+enum class BottomNavItem(
+    val title: String,
+    val route: String,
+    val icon: ImageVector,
+) {
+    Integer(
+        "Integer",
+        "integer",
+        Icons.Rounded.Numbers
+    ),
+    Decimal(
+        "Decimal",
+        "decimal",
+        Icons.Rounded.AttachMoney
+    ),
+    Biometric(
+        "Biometric",
+        "biometric",
+        Icons.Rounded.Fingerprint
+    ),
+    Custom(
+        "Custom",
+        "custom",
+        Icons.Rounded.DashboardCustomize
+    )
 }

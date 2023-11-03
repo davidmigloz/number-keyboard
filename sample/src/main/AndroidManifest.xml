@@ -17,25 +17,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.davidmiguel.sample.KeyboardIntegerActivity" />
-        <activity android:name="com.davidmiguel.sample.KeyboardDecimalActivity" />
-        <activity android:name="com.davidmiguel.sample.KeyboardFingerprintActivity" />
-        <activity android:name="com.davidmiguel.sample.KeyboardCustomActivity" />
-        <activity
-            android:name="com.davidmiguel.sample.KeyboardCustomSquareActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="com.davidmiguel.sample"
-                    android:pathPattern="/KeyboardCustomSquareActivity"
-                    android:scheme="https" />
-            </intent-filter>
-        </activity>
     </application>
 </manifest>

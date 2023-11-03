@@ -1,13 +1,31 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+plugins {
+    id("com.android.application")
+    id("kotlin-android")
+}
 
-ext.versionMajor = 1 // API Changes, adding big new feature, redesign the App
-ext.versionMinor = 0 // New features in a backwards-compatible manner
-ext.versionPatch = 0 // Backwards-compatible bug fixes
-ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
+ext {
+    versionMajor = 2 // API Changes, adding big new feature, redesign the App
+    versionMinor = 0 // New features in a backwards-compatible manner
+    versionPatch = 0 // Backwards-compatible bug fixes
+    versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
+}
 
 android {
+    namespace 'com.davidmiguel.sample'
+
     compileSdkVersion androidConfig.compileSdkVersion
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = composeCompiler
+    }
+
+    kotlin {
+        jvmToolchain(jvmToolchainVersion)
+    }
 
     defaultConfig {
         applicationId "com.davidmiguel.numberkeyboard.sample"
@@ -27,7 +45,9 @@ android {
 
 dependencies {
     implementation project(':lib')
-    implementation appDependencies.androidXCore
-    implementation appDependencies.appcompat
-    implementation appDependencies.kotlinStdlib
+    implementation platform("androidx.compose:compose-bom:$composeBoM")
+    implementation("androidx.navigation:navigation-compose:$composeNav")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
+    implementation 'androidx.compose.ui:ui-tooling-preview-android:1.5.4'
 }

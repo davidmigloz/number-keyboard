@@ -1,13 +1,31 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id("com.android.library")
+    id("kotlin-android")
+}
 
-ext.versionMajor = 3 // API Changes, adding big new feature, redesign the App
-ext.versionMinor = 1 // New features in a backwards-compatible manner
-ext.versionPatch = 0 // Backwards-compatible bug fixes
-ext.versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
+ext {
+    versionMajor = 4 // API Changes, adding big new feature, redesign the App
+    versionMinor = 0 // New features in a backwards-compatible manner
+    versionPatch = 0 // Backwards-compatible bug fixes
+    versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
+}
 
 android {
+    namespace 'com.davidmiguel.numberkeyboard'
+
     compileSdkVersion androidConfig.compileSdkVersion
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = composeCompiler
+    }
+
+    kotlin {
+        jvmToolchain(jvmToolchainVersion)
+    }
 
     defaultConfig {
         minSdkVersion androidConfig.minSdkVersion
@@ -22,9 +40,7 @@ android {
 }
 
 dependencies {
-    api appDependencies.constraintLayout
-    implementation appDependencies.androidXCore
-    implementation appDependencies.appcompat
-    implementation appDependencies.annotations
-    implementation appDependencies.kotlinStdlib
+    implementation platform("androidx.compose:compose-bom:$composeBoM")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.material:material-icons-extended")
 }
