@@ -1,2 +1,5 @@
 jdk:
   - openjdk18
+before_install:
+  - sdk install java 18.0.2.1-tem
+  - sdk use java 18.0.2.1-tem

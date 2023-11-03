@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.2  *(03/11/2023)*
+
+- Fix JitPack build
+
 ## Version 4.0.1  *(03/11/2023)*
 
 - Fix JitPack build
