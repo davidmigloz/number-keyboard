@@ -63,7 +63,7 @@ fun NumberKeyboard(
             if (standardisedAmount in 0.0..maxAllowedAmount) {
                 amount += number
             } else {
-                amount = if (roundUpToMax) maxAllowedAmount.toBigDecimal().setScale(maxAllowedDecimals, RoundingMode.UP).toString() else amount
+                amount = if (roundUpToMax) maxAllowedAmount.toString().replace('.', decimalSeparator) else amount
             }
             listener?.onUpdated(NumberKeyboardData(amount, decimalSeparator, groupingSeparator, currencySymbol))
         }
