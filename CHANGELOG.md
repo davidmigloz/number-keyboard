@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.3  *(XX/03/2024)*
+
+- Fix max amount formatting with correct separator
+
 ## Version 4.0.2  *(03/11/2023)*
 
 - Fix JitPack build
