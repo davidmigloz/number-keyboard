@@ -3,6 +3,7 @@
 ## Version 4.0.3  *(XX/03/2024)*
 
 - Fix max amount formatting with correct separator
+- Add initialAmount support and cleanup unused ExperimentalLayoutApi warnings
 
 ## Version 4.0.2  *(03/11/2023)*
 
