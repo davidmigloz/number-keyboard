@@ -27,7 +27,6 @@ import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun DecimalScreen(innerPadding: PaddingValues) {
     val currencySymbol = "$"

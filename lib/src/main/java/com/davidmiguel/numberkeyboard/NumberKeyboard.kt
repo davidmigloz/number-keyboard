@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.dp
 import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardClickedListener
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
-import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
 @Composable
 fun NumberKeyboard(
+    initialAmount: Double = 0.0,
     maxAllowedAmount: Double = 10_000.0,
     maxAllowedDecimals: Int = 2,
     currencySymbol: String = "$",
@@ -34,7 +34,7 @@ fun NumberKeyboard(
     groupingSeparator: Char = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.groupingSeparator,
     listener: NumberKeyboardListener? = null
 ) {
-    var amount by remember { mutableStateOf("") }
+    var amount by remember { mutableStateOf(if (initialAmount != 0.0) initialAmount.toInt().toString() else "") }
 
     val firstRow: List<Int>
     val secondRow: List<Int>

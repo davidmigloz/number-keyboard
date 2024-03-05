@@ -29,7 +29,6 @@ import com.davidmiguel.numberkeyboard.NumberKeyboardButton
 import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext.current) {
     Column(
