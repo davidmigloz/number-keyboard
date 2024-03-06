@@ -76,6 +76,7 @@ NumberKeyboard(
 
 ##### Attribute
 
+- `initialAmount` - Double (default: 0.0): Initial amount for `NumberKeyboard` output
 - `maxAllowedAmount` - Double (default: 10_000.0): Maximum amount allowed for the `NumberKeyboard` output
 - `maxAllowedDecimals` - Int (default: 2): Maximum decimal points allowed for the `NumberKeyboard` output
 - `currencySymbol` - String (default: "$"): Currency symbol for the `NumberKeyboardData` currency format output

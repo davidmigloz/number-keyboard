@@ -31,7 +31,6 @@ import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
 import java.text.DecimalFormat
 import java.text.NumberFormat
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun CustomScreen(innerPadding: PaddingValues) {
     val currencySymbol = "€"
