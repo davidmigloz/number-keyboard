@@ -8,7 +8,7 @@ Android library that provides a number keyboard composable.
 
 ### Step 1
 
-Add the JitPack repository to your `build.gradle ` file:
+Add the JitPack repository to your `build.gradle` file:
 
 ```gradle
 allprojects {
@@ -25,7 +25,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	implementation 'com.github.davidmigloz:number-keyboard:4.0.2'
+	implementation 'com.github.davidmigloz:number-keyboard:4.0.5'
 }
 ```
 

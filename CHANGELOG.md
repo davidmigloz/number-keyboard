@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.5  *(07/03/2024)*
+
+- Downgrade androidGradle to v8.2.2
+
 ## Version 4.0.4  *(07/03/2024)*
 
 - Fix JitPack Java SDK to v20.0.2

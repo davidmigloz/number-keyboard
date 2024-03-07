@@ -4,7 +4,7 @@ ext {
     //----------------------------------------------------------------------------------------------
 
     // Android Plugin for Gradle : https://mvnrepository.com/artifact/com.android.tools.build/gradle?repo=google | https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin
-    androidGradle = '8.3.0'
+    androidGradle = '8.2.2'
     // Kotlin : https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-gradle-plugin
     // Kotlin Compose Compatibility Map : https://developer.android.com/jetpack/androidx/releases/compose-kotlin
     kotlin = '1.9.22'
