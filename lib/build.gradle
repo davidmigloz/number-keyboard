@@ -6,7 +6,7 @@ plugins {
 ext {
     versionMajor = 4 // API Changes, adding big new feature, redesign the App
     versionMinor = 0 // New features in a backwards-compatible manner
-    versionPatch = 5 // Backwards-compatible bug fixes
+    versionPatch = 6 // Backwards-compatible bug fixes
     versionClassifier = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 }
 

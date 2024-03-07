@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 4.0.6  *(07/03/2024)*
+
+- Downgrade to Java 18
+
 ## Version 4.0.5  *(07/03/2024)*
 
 - Downgrade androidGradle to v8.2.2
