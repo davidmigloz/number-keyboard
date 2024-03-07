@@ -1,6 +1,10 @@
 # Change Log
 
-## Version 4.0.3  *(XX/03/2024)*
+## Version 4.0.4  *(07/03/2024)*
+
+- Fix JitPack Java SDK to v20.0.2
+
+## Version 4.0.3  *(06/03/2024)*
 
 - Fix max amount formatting with correct separator
 - Add initialAmount support and cleanup unused ExperimentalLayoutApi warnings

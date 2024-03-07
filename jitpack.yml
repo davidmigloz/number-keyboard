@@ -1,5 +1,6 @@
+# https://adoptium.net/temurin/releases
 jdk:
-  - openjdk18
+  - openjdk20
 before_install:
-  - sdk install java 18.0.2.1-tem
-  - sdk use java 18.0.2.1-tem
+  - sdk install java 20.0.2-tem
+  - sdk use java java 20.0.2-tem
