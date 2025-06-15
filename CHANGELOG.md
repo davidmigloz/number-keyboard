@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 4.0.7  *(15/06/2024)*
+
+- Added `iconTint` and `colors` parameters to `NumberKeyboardAuxButton` to allow
+  customization of delete button color and styling
+
 ## Version 4.0.6  *(07/03/2024)*
 
 - Downgrade to Java 18
