@@ -48,6 +48,19 @@ fun NumberKeyboardButton(
     }
 }
 
+/**
+ * Default auxiliary button for [NumberKeyboard]. Can display either text or an icon.
+ *
+ * @param modifier button modifier
+ * @param textStyle style applied to [value] text
+ * @param shape button shape
+ * @param haptics haptic feedback implementation
+ * @param value optional text displayed inside the button
+ * @param imageVector optional icon displayed when [value] is null or blank
+ * @param clicked callback invoked when the button is clicked
+ * @param colors customizable [ButtonColors] for the button
+ * @param iconTint tint applied to [imageVector]
+ */
 @Composable
 fun NumberKeyboardAuxButton(
     modifier: Modifier,

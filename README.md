@@ -142,6 +142,25 @@ fun NumberKeyboardButton(
 }
 ```
 
+`NumberKeyboardAuxButton` provides the default look for the auxiliary keys. It
+now accepts `colors` and `iconTint` so you can customise the delete button and
+other icons:
+
+```kotlin
+@Composable
+fun NumberKeyboardAuxButton(
+    modifier: Modifier,
+    textStyle: TextStyle,
+    shape: Shape = RoundedCornerShape(size = 8.dp),
+    haptics: HapticFeedback = LocalHapticFeedback.current,
+    value: String? = null,
+    imageVector: ImageVector? = null,
+    clicked: () -> Unit,
+    colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
+    iconTint: Color = LocalContentColor.current
+)
+```
+
 ##### NumberKeyboardListener
 
 This listener is _optional_, but if you want to utilise this. Make sure that the `NumberKeyboardClickedListener` is configured properly when you are building your button layouts.
