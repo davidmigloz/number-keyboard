@@ -5,16 +5,20 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalContentColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardClickedListener
@@ -52,13 +56,16 @@ fun NumberKeyboardAuxButton(
     haptics: HapticFeedback = LocalHapticFeedback.current,
     value: String? = null,
     imageVector: ImageVector? = null,
-    clicked: () -> Unit
+    clicked: () -> Unit,
+    colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
+    iconTint: Color = LocalContentColor.current
 ) {
     if (value.isNullOrBlank() && imageVector == null) return
     OutlinedButton(
         modifier = modifier,
         shape = shape,
         border = BorderStroke(1.dp, Color.LightGray),
+        colors = colors,
         onClick = {
             haptics.performHapticFeedback(HapticFeedbackType.LongPress)
             clicked.invoke()
@@ -72,7 +79,8 @@ fun NumberKeyboardAuxButton(
         } else if (imageVector != null) {
             Image(
                 imageVector = imageVector,
-                contentDescription = imageVector.name
+                contentDescription = imageVector.name,
+                colorFilter = ColorFilter.tint(iconTint)
             )
         }
     }

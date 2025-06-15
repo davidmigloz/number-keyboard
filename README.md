@@ -25,7 +25,7 @@ Add the dependency:
 
 ```gradle
 dependencies {
-	implementation 'com.github.davidmigloz:number-keyboard:4.0.6'
+        implementation 'com.github.davidmigloz:number-keyboard:4.0.7'
 }
 ```
 
@@ -63,6 +63,7 @@ NumberKeyboard(
       modifier = buttonModifier,
       textStyle = buttonTextStyle,
       imageVector = Icons.Rounded.Backspace,
+      iconTint = MaterialTheme.colorScheme.primary,
       clicked = { clickedListener.onRightAuxButtonClicked() }
     )
   },
