@@ -4,8 +4,8 @@ ext {
 
     androidConfig = [
             minSdkVersion    : 21,
-            targetSdkVersion : 34,
-            compileSdkVersion: 34
+            targetSdkVersion : 36,
+            compileSdkVersion: 36
     ]
 
     /**
