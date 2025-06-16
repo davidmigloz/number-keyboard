@@ -1,7 +1,6 @@
 package com.davidmiguel.sample
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -13,7 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Backspace
+import androidx.compose.material.icons.automirrored.rounded.Backspace
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -104,7 +103,7 @@ fun CustomScreen(innerPadding: PaddingValues) {
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     shape = CircleShape,
-                    imageVector = Icons.Rounded.Backspace,
+                    imageVector = Icons.AutoMirrored.Rounded.Backspace,
                     clicked = { clickedListener.onRightAuxButtonClicked() }
                 )
             },

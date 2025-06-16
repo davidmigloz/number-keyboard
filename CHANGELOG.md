@@ -1,5 +1,10 @@
 # Change Log
 
+## Version 4.0.8  *(16/06/2024)*
+
+- Update dependencies and target SDK 36
+- Fix import for LocalContentColor
+
 ## Version 4.0.7  *(15/06/2024)*
 
 - Added `iconTint` and `colors` parameters to `NumberKeyboardAuxButton` to allow

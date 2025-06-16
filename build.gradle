@@ -9,6 +9,7 @@ buildscript {
         apply from: 'dependencies.gradle'
         classpath "com.android.tools.build:gradle:$androidGradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
+        classpath "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin:$kotlin"
     }
 }
 

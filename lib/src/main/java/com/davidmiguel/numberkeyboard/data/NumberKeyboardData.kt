@@ -1,3 +1,5 @@
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
+
 package com.davidmiguel.numberkeyboard.data
 
 import java.text.DecimalFormat

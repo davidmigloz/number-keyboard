@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.LocalContentColor
+import androidx.compose.material3.LocalContentColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardClickedListener

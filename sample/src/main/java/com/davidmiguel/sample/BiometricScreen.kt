@@ -3,7 +3,6 @@ package com.davidmiguel.sample
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -11,7 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Backspace
+import androidx.compose.material.icons.automirrored.rounded.Backspace
 import androidx.compose.material.icons.rounded.Fingerprint
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -95,7 +94,7 @@ fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext
                 NumberKeyboardAuxButton(
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
-                    imageVector = Icons.Rounded.Backspace,
+                    imageVector = Icons.AutoMirrored.Rounded.Backspace,
                     clicked = { clickedListener.onRightAuxButtonClicked() }
                 )
             },

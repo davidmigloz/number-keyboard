@@ -53,7 +53,7 @@ private fun NavigationBar(navController: NavController) {
     val currentDestination = navBackStackEntry?.destination
 
     NavigationBar {
-        BottomNavItem.values().forEach { screen ->
+        BottomNavItem.entries.forEach { screen ->
             NavigationBarItem(
                 icon = { Icon(screen.icon, contentDescription = screen.title) },
                 label = { Text(screen.title) },
