@@ -1,0 +1,29 @@
+[versions]
+agp = "8.11.0"
+kotlin = "2.2.0"
+
+android-compileSdk = "36"
+android-minSdk = "21"
+android-targetSdk = "36"
+
+compose-nav = "2.9.1"
+compose-bom = "2025.06.01"
+compose-ui-tooling-preview = "1.8.3"
+
+[libraries]
+
+compose-nav = { module = "androidx.navigation:navigation-compose", version.ref = "compose-nav" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
+compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview-android", version.ref = "compose-ui-tooling-preview" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+
+kotlin-gradle = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }

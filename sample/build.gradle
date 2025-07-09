@@ -1,7 +1,8 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.android.application)
     id 'kotlin-android'
-    id 'org.jetbrains.kotlin.plugin.compose'
+    alias(libs.plugins.kotlin.compose)
+//    id 'org.jetbrains.kotlin.plugin.compose'
 }
 
 ext {
@@ -42,9 +43,10 @@ android {
 
 dependencies {
     implementation project(':lib')
-    implementation platform("androidx.compose:compose-bom:$composeBoM")
-    implementation("androidx.navigation:navigation-compose:$composeNav")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.compose.ui:ui-tooling-preview-android:$composeUiToolingPreview")
+
+    implementation platform(libs.compose.bom)
+    implementation libs.compose.nav
+    implementation libs.compose.material3
+    implementation libs.compose.material.icons.extended
+    implementation libs.compose.ui.tooling.preview
 }
