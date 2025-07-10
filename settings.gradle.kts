@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 
-include ':sample', ':lib'
+include(":sample", ":lib")
