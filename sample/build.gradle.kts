@@ -17,7 +17,7 @@ val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT
 kotlin {
     androidTarget {
         compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_20)
+            jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvm.get()}"))
         }
     }
     jvmToolchain(libs.versions.jvm.get().toInt())
@@ -25,16 +25,22 @@ kotlin {
     sourceSets {
         val androidMain by getting {
             dependencies {
-                implementation(project(":lib"))
-                implementation(libs.compose.ui.tooling.preview)
+
             }
         }
         val commonMain by getting {
             dependencies {
+                implementation(project(":lib"))
                 implementation(project.dependencies.platform(libs.compose.bom))
-                implementation(libs.compose.nav)
-                implementation(libs.compose.material3)
-                implementation(libs.compose.material.icons.extended)
+//                implementation(libs.compose.material3)
+//                implementation(libs.compose.material.icons.extended)
+//                implementation(libs.compose.ui.tooling.preview)
+
+                implementation(compose.material3)
+                implementation(compose.components.uiToolingPreview)
+                implementation(compose.materialIconsExtended)
+
+                implementation(libs.androidx.navigation.compose)
             }
         }
     }
