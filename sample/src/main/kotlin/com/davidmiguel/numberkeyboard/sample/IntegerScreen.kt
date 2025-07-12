@@ -1,4 +1,4 @@
-package com.davidmiguel.sample
+package com.davidmiguel.numberkeyboard.sample
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -23,12 +23,9 @@ import com.davidmiguel.numberkeyboard.NumberKeyboardAuxButton
 import com.davidmiguel.numberkeyboard.NumberKeyboardButton
 import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
 import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 @Composable
-fun DecimalScreen(innerPadding: PaddingValues) {
-    val currencySymbol = "$"
+fun IntegerScreen(innerPadding: PaddingValues) {
     Column(
         Modifier
             .padding(innerPadding)
@@ -41,13 +38,20 @@ fun DecimalScreen(innerPadding: PaddingValues) {
         )
 
         Text(
-            text = "Decimal",
+            text = "Integer",
             style = MaterialTheme.typography.titleLarge,
+        )
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "maxAllowedDecimals = 0",
+            style = MaterialTheme.typography.titleMedium,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var text by remember { mutableStateOf("$currencySymbol 0") }
+        var text by remember { mutableStateOf("0") }
 
         Text(
             text = text,
@@ -61,20 +65,13 @@ fun DecimalScreen(innerPadding: PaddingValues) {
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
         NumberKeyboard(
+            maxAllowedDecimals = 0,
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     number = number,
                     listener = clickedListener
-                )
-            },
-            leftAuxButton = { clickedListener ->
-                NumberKeyboardAuxButton(
-                    modifier = buttonModifier,
-                    textStyle = buttonTextStyle,
-                    value = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.decimalSeparator.toString(),
-                    clicked = { clickedListener.onLeftAuxButtonClicked() }
                 )
             },
             rightAuxButton = { clickedListener ->
@@ -87,7 +84,7 @@ fun DecimalScreen(innerPadding: PaddingValues) {
             },
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.currency
+                    text = data.int.toString()
                 }
             }
         )

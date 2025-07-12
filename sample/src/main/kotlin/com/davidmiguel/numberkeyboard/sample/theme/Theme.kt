@@ -1,4 +1,4 @@
-package com.davidmiguel.sample.theme
+package com.davidmiguel.numberkeyboard.sample.theme
 
 import android.app.Activity
 import android.os.Build

@@ -1,4 +1,4 @@
-package com.davidmiguel.sample
+package com.davidmiguel.numberkeyboard.sample
 
 import android.content.Context
 import android.widget.Toast

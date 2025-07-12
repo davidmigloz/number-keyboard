@@ -1,6 +1,7 @@
 [versions]
 agp = "8.11.0"
 kotlin = "2.2.0"
+compose-multiplatform = "1.8.2"
 
 jvm = "21"
 android-compileSdk = "36"
@@ -25,6 +26,8 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 
 kotlin-gradle = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }

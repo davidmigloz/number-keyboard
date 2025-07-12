@@ -1,4 +1,4 @@
-package com.davidmiguel.sample.theme
+package com.davidmiguel.numberkeyboard.sample.theme
 
 import androidx.compose.ui.graphics.Color
 

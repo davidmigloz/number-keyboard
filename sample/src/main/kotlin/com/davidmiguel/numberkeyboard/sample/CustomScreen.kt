@@ -1,4 +1,4 @@
-package com.davidmiguel.sample
+package com.davidmiguel.numberkeyboard.sample
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues

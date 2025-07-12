@@ -1,10 +1,12 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import versioning.generateVersionCode
 import versioning.generateVersionName
 
 plugins {
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
 }
 
 val versionMajor = 2 // API Changes, adding big new feature, redesign the App
@@ -12,16 +14,41 @@ val versionMinor = 0 // New features in a backwards-compatible manner
 val versionPatch = 0 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_20)
+        }
+    }
+    jvmToolchain(libs.versions.jvm.get().toInt())
+
+    sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(project(":lib"))
+                implementation(libs.compose.ui.tooling.preview)
+            }
+        }
+        val commonMain by getting {
+            dependencies {
+                implementation(project.dependencies.platform(libs.compose.bom))
+                implementation(libs.compose.nav)
+                implementation(libs.compose.material3)
+                implementation(libs.compose.material.icons.extended)
+            }
+        }
+    }
+}
+
 android {
-    namespace = "com.davidmiguel.sample"
+    namespace = "com.davidmiguel.numberkeyboard.sample"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    // Remove once migrated to KMP
+    sourceSets["main"].manifest.srcFile("src/main/AndroidManifest.xml")
 
     buildFeatures {
         compose = true
-    }
-
-    kotlin {
-        jvmToolchain(libs.versions.jvm.get().toInt())
     }
 
     defaultConfig {
@@ -41,14 +68,4 @@ android {
             )
         }
     }
-}
-
-dependencies {
-    implementation(project(":lib"))
-
-    implementation(platform(libs.compose.bom))
-    implementation(libs.compose.nav)
-    implementation(libs.compose.material3)
-    implementation(libs.compose.material.icons.extended)
-    implementation(libs.compose.ui.tooling.preview)
 }

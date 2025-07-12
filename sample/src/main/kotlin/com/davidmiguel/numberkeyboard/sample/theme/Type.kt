@@ -1,4 +1,4 @@
-package com.davidmiguel.sample.theme
+package com.davidmiguel.numberkeyboard.sample.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
