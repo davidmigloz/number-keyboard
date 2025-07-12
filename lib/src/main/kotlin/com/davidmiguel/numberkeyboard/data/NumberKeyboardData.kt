@@ -55,7 +55,10 @@ private fun formatCurrency(
 }
 
 private fun Locale.isCurrencySymbolInFront(): Boolean {
-    val transformedLocale = Locale(this.country.lowercase(), this.country)
+    val transformedLocale = Locale.Builder()
+        .setRegion(this.country)
+        .build()
+
     return (NumberFormat.getCurrencyInstance(transformedLocale) as DecimalFormat).positivePrefix.isNotBlank()
 }
 
