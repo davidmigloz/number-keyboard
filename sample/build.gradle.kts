@@ -23,19 +23,10 @@ kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
 
     sourceSets {
-        val androidMain by getting {
-            dependencies {
-
-            }
-        }
         val commonMain by getting {
             dependencies {
                 implementation(project(":lib"))
                 implementation(project.dependencies.platform(libs.compose.bom))
-//                implementation(libs.compose.material3)
-//                implementation(libs.compose.material.icons.extended)
-//                implementation(libs.compose.ui.tooling.preview)
-
                 implementation(compose.material3)
                 implementation(compose.components.uiToolingPreview)
                 implementation(compose.materialIconsExtended)
