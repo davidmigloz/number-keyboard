@@ -23,16 +23,14 @@ kotlin {
     jvmToolchain(libs.versions.jvm.get().toInt())
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation(project(":lib"))
-                implementation(project.dependencies.platform(libs.compose.bom))
-                implementation(compose.material3)
-                implementation(compose.components.uiToolingPreview)
-                implementation(compose.materialIconsExtended)
+        commonMain.dependencies {
+            implementation(project(":lib"))
+            implementation(project.dependencies.platform(libs.compose.bom))
+            implementation(compose.material3)
+            implementation(compose.components.uiToolingPreview)
+            implementation(compose.materialIconsExtended)
 
-                implementation(libs.androidx.navigation.compose)
-            }
+            implementation(libs.androidx.navigation.compose)
         }
     }
 }
@@ -40,13 +38,6 @@ kotlin {
 android {
     namespace = "com.davidmiguel.numberkeyboard.sample"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
-
-    // Remove once migrated to KMP
-    sourceSets["main"].manifest.srcFile("src/main/AndroidManifest.xml")
-
-    buildFeatures {
-        compose = true
-    }
 
     defaultConfig {
         applicationId = "com.davidmiguel.numberkeyboard.sample"

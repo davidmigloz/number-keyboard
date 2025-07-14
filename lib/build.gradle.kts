@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import versioning.generateVersionName
 
 plugins {
@@ -13,6 +14,13 @@ val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT
 
 kotlin {
     androidTarget()
+
+    androidTarget {
+        publishLibraryVariants("release")
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
 
     jvmToolchain(libs.versions.jvm.get().toInt())
 
@@ -34,14 +42,6 @@ android {
         version = generateVersionName(versionMajor, versionMinor, versionPatch, versionClassifier)
 
         consumerProguardFiles("proguard-rules.pro")
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
-
-    buildFeatures {
-        compose = true
-    }
-
     resourcePrefix = "numberkeyboard_"
 }
