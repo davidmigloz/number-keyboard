@@ -1,4 +1,4 @@
-package com.davidmiguel.numberkeyboard.sample
+package com.davidmigloz.numberkeyboard.sample
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,7 +24,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.davidmiguel.numberkeyboard.sample.theme.AppTheme
+import com.davidmigloz.numberkeyboard.sample.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
 

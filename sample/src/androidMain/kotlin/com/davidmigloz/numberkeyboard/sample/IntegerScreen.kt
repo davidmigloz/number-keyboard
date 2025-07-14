@@ -1,7 +1,5 @@
-package com.davidmiguel.numberkeyboard.sample
+package com.davidmigloz.numberkeyboard.sample
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Backspace
-import androidx.compose.material.icons.rounded.Fingerprint
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,16 +17,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.davidmiguel.numberkeyboard.NumberKeyboard
-import com.davidmiguel.numberkeyboard.NumberKeyboardAuxButton
-import com.davidmiguel.numberkeyboard.NumberKeyboardButton
-import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
-import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
+import com.davidmigloz.numberkeyboard.NumberKeyboard
+import com.davidmigloz.numberkeyboard.NumberKeyboardAuxButton
+import com.davidmigloz.numberkeyboard.NumberKeyboardButton
+import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
 
 @Composable
-fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext.current) {
+fun IntegerScreen(innerPadding: PaddingValues) {
     Column(
         Modifier
             .padding(innerPadding)
@@ -42,16 +38,14 @@ fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext
         )
 
         Text(
-            text = "Fingerprint",
+            text = "Integer",
             style = MaterialTheme.typography.titleLarge,
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "maxAllowedAmount = 9_999.00\n" +
-                    "maxAllowedDecimals = 0\n" +
-                    "roundUpToMax = false",
+            text = "maxAllowedDecimals = 0",
             style = MaterialTheme.typography.titleMedium,
         )
 
@@ -71,23 +65,13 @@ fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
         NumberKeyboard(
-            maxAllowedAmount = 9_999.00,
             maxAllowedDecimals = 0,
-            roundUpToMax = false,
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     number = number,
                     listener = clickedListener
-                )
-            },
-            leftAuxButton = { _ ->
-                NumberKeyboardAuxButton(
-                    modifier = buttonModifier,
-                    textStyle = buttonTextStyle,
-                    imageVector = Icons.Rounded.Fingerprint,
-                    clicked = { Toast.makeText(context, "Biometrics Triggered", Toast.LENGTH_SHORT).show() }
                 )
             },
             rightAuxButton = { clickedListener ->

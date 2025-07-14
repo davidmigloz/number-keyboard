@@ -1,6 +1,6 @@
 @file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
-package com.davidmiguel.numberkeyboard.data
+package com.davidmigloz.numberkeyboard.data
 
 import java.text.DecimalFormat
 import java.text.NumberFormat

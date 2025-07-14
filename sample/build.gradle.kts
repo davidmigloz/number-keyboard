@@ -36,7 +36,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.davidmiguel.numberkeyboard.sample"
+    namespace = "com.davidmigloz.numberkeyboard.sample"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {

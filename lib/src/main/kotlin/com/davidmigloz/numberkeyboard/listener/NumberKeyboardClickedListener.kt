@@ -1,4 +1,4 @@
-package com.davidmiguel.numberkeyboard.listener
+package com.davidmigloz.numberkeyboard.listener
 
 interface NumberKeyboardClickedListener {
     fun onNumberClicked(number: Int)

@@ -1,4 +1,4 @@
-package com.davidmiguel.numberkeyboard
+package com.davidmigloz.numberkeyboard
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,9 +11,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
-import com.davidmiguel.numberkeyboard.listener.NumberKeyboardClickedListener
-import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
+import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
+import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
 import java.text.DecimalFormat
 import java.text.NumberFormat
 

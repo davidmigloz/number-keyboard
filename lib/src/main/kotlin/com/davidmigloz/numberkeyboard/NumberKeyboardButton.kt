@@ -1,4 +1,4 @@
-package com.davidmiguel.numberkeyboard
+package com.davidmigloz.numberkeyboard
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -21,7 +21,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.davidmiguel.numberkeyboard.listener.NumberKeyboardClickedListener
+import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
 
 @Composable
 fun NumberKeyboardButton(

@@ -1,4 +1,4 @@
-package com.davidmiguel.numberkeyboard.sample
+package com.davidmigloz.numberkeyboard.sample
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -18,14 +18,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.davidmiguel.numberkeyboard.NumberKeyboard
-import com.davidmiguel.numberkeyboard.NumberKeyboardAuxButton
-import com.davidmiguel.numberkeyboard.NumberKeyboardButton
-import com.davidmiguel.numberkeyboard.data.NumberKeyboardData
-import com.davidmiguel.numberkeyboard.listener.NumberKeyboardListener
+import com.davidmigloz.numberkeyboard.NumberKeyboard
+import com.davidmigloz.numberkeyboard.NumberKeyboardAuxButton
+import com.davidmigloz.numberkeyboard.NumberKeyboardButton
+import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
+import java.text.DecimalFormat
+import java.text.NumberFormat
 
 @Composable
-fun IntegerScreen(innerPadding: PaddingValues) {
+fun DecimalScreen(innerPadding: PaddingValues) {
+    val currencySymbol = "$"
     Column(
         Modifier
             .padding(innerPadding)
@@ -38,20 +41,13 @@ fun IntegerScreen(innerPadding: PaddingValues) {
         )
 
         Text(
-            text = "Integer",
+            text = "Decimal",
             style = MaterialTheme.typography.titleLarge,
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Text(
-            text = "maxAllowedDecimals = 0",
-            style = MaterialTheme.typography.titleMedium,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var text by remember { mutableStateOf("0") }
+        var text by remember { mutableStateOf("$currencySymbol 0") }
 
         Text(
             text = text,
@@ -65,13 +61,20 @@ fun IntegerScreen(innerPadding: PaddingValues) {
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
         NumberKeyboard(
-            maxAllowedDecimals = 0,
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     number = number,
                     listener = clickedListener
+                )
+            },
+            leftAuxButton = { clickedListener ->
+                NumberKeyboardAuxButton(
+                    modifier = buttonModifier,
+                    textStyle = buttonTextStyle,
+                    value = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.decimalSeparator.toString(),
+                    clicked = { clickedListener.onLeftAuxButtonClicked() }
                 )
             },
             rightAuxButton = { clickedListener ->
@@ -84,7 +87,7 @@ fun IntegerScreen(innerPadding: PaddingValues) {
             },
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.int.toString()
+                    text = data.currency
                 }
             }
         )
