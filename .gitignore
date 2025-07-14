@@ -189,4 +189,20 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
+# KMP
+**/build/
+xcuserdata
+!src/**/build/
+.idea
+.kotlin
+captures
+.cxx
+iosApp/iosApp.xcodeproj/*
+iosApp/Configuration/Config.xcconfig
+iosApp/iosApp.xcodeproj/project.pbxproj
+iosApp/iosApp.xcodeproj/xcshareddata/
+iosApp/iosApp.xcodeproj/project.xcworkspace/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings
+
 # End of https://www.gitignore.io/api/git,gradle,android,androidstudio
