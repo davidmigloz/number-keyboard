@@ -1,3 +1,4 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import versioning.generateVersionCode
 import versioning.generateVersionName
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose.hot.reload)
 }
 
 val versionMajor = 2 // API Changes, adding big new feature, redesign the App
@@ -26,7 +28,7 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
-            baseName = "ComposeApp"
+            baseName = "sample"
             isStatic = true
         }
     }
@@ -44,6 +46,11 @@ kotlin {
             implementation(compose.materialIconsExtended)
 
             implementation(libs.androidx.navigation.compose)
+        }
+
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutinesSwing)
         }
     }
 }
@@ -67,6 +74,18 @@ android {
                 getDefaultProguardFile("proguard-android.txt"),
                 "proguard-rules.pro"
             )
+        }
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.davidmigloz.numberkeyboard.sample.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "com.davidmigloz.numberkeyboard.sample"
+            packageVersion = generateVersionName(versionMajor, versionMinor, versionPatch, versionClassifier)
         }
     }
 }

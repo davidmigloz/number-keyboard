@@ -1,7 +1,5 @@
 package com.davidmigloz.numberkeyboard.sample
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +18,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.davidmigloz.numberkeyboard.NumberKeyboard
 import com.davidmigloz.numberkeyboard.NumberKeyboardAuxButton
@@ -29,7 +26,7 @@ import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
 
 @Composable
-fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext.current) {
+fun BiometricScreen(innerPadding: PaddingValues) {
     Column(
         Modifier
             .padding(innerPadding)
@@ -87,7 +84,9 @@ fun BiometricScreen(innerPadding: PaddingValues, context: Context = LocalContext
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     imageVector = Icons.Rounded.Fingerprint,
-                    clicked = { Toast.makeText(context, "Biometrics Triggered", Toast.LENGTH_SHORT).show() }
+                    clicked = {
+//                        Toast.makeText(context, "Biometrics Triggered", Toast.LENGTH_SHORT).show()
+                    }
                 )
             },
             rightAuxButton = { clickedListener ->
