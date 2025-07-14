@@ -20,9 +20,22 @@ kotlin {
             jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvm.get()}"))
         }
     }
-    jvmToolchain(libs.versions.jvm.get().toInt())
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "ComposeApp"
+            isStatic = true
+        }
+    }
+
+    jvm("desktop")
 
     sourceSets {
+        val desktopMain by getting
+
         commonMain.dependencies {
             implementation(project(":lib"))
             implementation(project.dependencies.platform(libs.compose.bom))

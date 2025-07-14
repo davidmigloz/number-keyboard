@@ -4,6 +4,7 @@ import versioning.generateVersionName
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
 }
 
@@ -13,22 +14,24 @@ val versionPatch = 8 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 kotlin {
-    androidTarget()
-
     androidTarget {
         publishLibraryVariants("release")
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+    jvm("desktop")
 
     jvmToolchain(libs.versions.jvm.get().toInt())
 
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.compose.bom))
-            implementation(libs.compose.material3)
-            implementation(libs.compose.material.icons.extended)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
         }
     }
 }
