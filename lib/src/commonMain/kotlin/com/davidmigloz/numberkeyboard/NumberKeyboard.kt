@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.data.NumberKeyboardFormat
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
 import kotlin.text.format
@@ -19,7 +21,7 @@ fun NumberKeyboard(
     maxAllowedAmount: Double = 10_000.0,
     maxAllowedDecimals: Int = 2,
     currencySymbol: String = "$",
-    isInverted: Boolean = false,
+    format: NumberKeyboardFormat = NumberKeyboardFormat.Default,
     roundUpToMax: Boolean = true,
     verticalArrangement: Arrangement.HorizontalOrVertical = Arrangement.spacedBy(8.dp),
     horizontalArrangement: Arrangement.HorizontalOrVertical = Arrangement.spacedBy(8.dp),
@@ -35,16 +37,33 @@ fun NumberKeyboard(
     val thirdRow: List<Int>
     val fourthRow: Int
 
-    if (!isInverted) {
-        firstRow = listOf(1, 2, 3)
-        secondRow = listOf(4, 5, 6)
-        thirdRow = listOf(7, 8, 9)
-        fourthRow = 0
-    } else {
-        firstRow = listOf(7, 8, 9)
-        secondRow = listOf(4, 5, 6)
-        thirdRow = listOf(1, 2, 3)
-        fourthRow = 0
+    when (format) {
+        NumberKeyboardFormat.Normal -> {
+            firstRow = listOf(1, 2, 3)
+            secondRow = listOf(4, 5, 6)
+            thirdRow = listOf(7, 8, 9)
+            fourthRow = 0
+        }
+        NumberKeyboardFormat.Inverted -> {
+            firstRow = listOf(7, 8, 9)
+            secondRow = listOf(4, 5, 6)
+            thirdRow = listOf(1, 2, 3)
+            fourthRow = 0
+        }
+        NumberKeyboardFormat.Scrambled -> {
+            val shuffled = remember { (0..9).shuffled() }
+            firstRow = shuffled.subList(0, 3)
+            secondRow = shuffled.subList(3, 6)
+            thirdRow = shuffled.subList(6, 9)
+            fourthRow = shuffled[9]
+        }
+        NumberKeyboardFormat.AlwaysScrambled -> {
+            val shuffled = (0..9).shuffled()
+            firstRow = shuffled.subList(0, 3)
+            secondRow = shuffled.subList(3, 6)
+            thirdRow = shuffled.subList(6, 9)
+            fourthRow = shuffled[9]
+        }
     }
 
     val clickedListener = object : NumberKeyboardClickedListener {

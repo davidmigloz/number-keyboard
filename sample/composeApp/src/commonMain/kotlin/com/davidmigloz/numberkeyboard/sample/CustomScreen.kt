@@ -26,6 +26,7 @@ import com.davidmigloz.numberkeyboard.NumberKeyboard
 import com.davidmigloz.numberkeyboard.NumberKeyboardAuxButton
 import com.davidmigloz.numberkeyboard.NumberKeyboardButton
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.data.NumberKeyboardFormat
 import com.davidmigloz.numberkeyboard.getDecimalSeparator
 import com.davidmigloz.numberkeyboard.getGroupingSeparator
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
@@ -82,7 +83,7 @@ fun CustomScreen(innerPadding: PaddingValues) {
             maxAllowedAmount = 8_888.888,
             maxAllowedDecimals = 3,
             currencySymbol = currencySymbol,
-            isInverted = true,
+            format = NumberKeyboardFormat.Scrambled,
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
