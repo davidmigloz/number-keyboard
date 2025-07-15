@@ -10,13 +10,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Backspace
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,12 +62,32 @@ fun CustomScreen(innerPadding: PaddingValues) {
         Text(
             text = "maxAllowedAmount = 8_888.888\n" +
                     "maxAllowedDecimals = 3\n" +
-                    "currencySymbol = $currencySymbol\n" +
-                    "isInverted = true",
+                    "currencySymbol = $currencySymbol\n",
             style = MaterialTheme.typography.titleMedium,
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        var selectedIndex by remember { mutableIntStateOf(0) }
+        val options = NumberKeyboardFormat.entries
+
+        SingleChoiceSegmentedButtonRow {
+            options.forEachIndexed { index, label ->
+                SegmentedButton(
+                    shape = SegmentedButtonDefaults.itemShape(
+                        index = index,
+                        count = options.size
+                    ),
+                    onClick = { selectedIndex = index },
+                    selected = index == selectedIndex,
+                    label = {
+                        BasicText(
+                            text = label.name,
+                            maxLines = 1,
+                            autoSize = TextAutoSize.StepBased(),
+                        )
+                    }
+                )
+            }
+        }
 
         var text by remember { mutableStateOf("$currencySymbol 0") }
 
@@ -83,7 +109,7 @@ fun CustomScreen(innerPadding: PaddingValues) {
             maxAllowedAmount = 8_888.888,
             maxAllowedDecimals = 3,
             currencySymbol = currencySymbol,
-            format = NumberKeyboardFormat.Scrambled,
+            format = NumberKeyboardFormat.entries[selectedIndex],
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
