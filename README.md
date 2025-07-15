@@ -9,7 +9,7 @@ KMP library that provides a number keyboard composable.
 ![screenshot_ios](img/numberkeyboard_screenshot_ios.png)
 
 **Desktop**
-![screenshot_desktop](img/numberkeyboard_screenshot_web.png)
+![screenshot_desktop](img/numberkeyboard_screenshot_desktop.png)
 
 ## Usage
 
