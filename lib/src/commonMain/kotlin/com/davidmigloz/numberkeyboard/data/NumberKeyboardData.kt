@@ -2,9 +2,7 @@
 
 package com.davidmigloz.numberkeyboard.data
 
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import java.util.Locale
+import com.davidmigloz.numberkeyboard.isCurrencySymbolInFront
 
 class NumberKeyboardData(
     amount: String,
@@ -47,19 +45,11 @@ private fun formatCurrency(
     currencySymbol: String
 ): String {
     val formattedAmount = formatAmount(amount, decimalSeparator, groupingSeparator)
-    return if (Locale.getDefault().isCurrencySymbolInFront()) {
+    return if (isCurrencySymbolInFront()) {
         "$currencySymbol $formattedAmount"
     } else {
         "$formattedAmount $currencySymbol"
     }
-}
-
-private fun Locale.isCurrencySymbolInFront(): Boolean {
-    val transformedLocale = Locale.Builder()
-        .setRegion(this.country)
-        .build()
-
-    return (NumberFormat.getCurrencyInstance(transformedLocale) as DecimalFormat).positivePrefix.isNotBlank()
 }
 
 private fun formatAmount(

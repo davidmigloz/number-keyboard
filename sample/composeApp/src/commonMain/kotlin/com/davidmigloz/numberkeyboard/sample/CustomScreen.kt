@@ -26,9 +26,9 @@ import com.davidmigloz.numberkeyboard.NumberKeyboard
 import com.davidmigloz.numberkeyboard.NumberKeyboardAuxButton
 import com.davidmigloz.numberkeyboard.NumberKeyboardButton
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
+import com.davidmigloz.numberkeyboard.getDecimalSeparator
+import com.davidmigloz.numberkeyboard.getGroupingSeparator
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 @Composable
 fun CustomScreen(innerPadding: PaddingValues) {
@@ -94,7 +94,7 @@ fun CustomScreen(innerPadding: PaddingValues) {
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     shape = CircleShape,
-                    value = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.decimalSeparator.toString(),
+                    value = getDecimalSeparator().toString(),
                     clicked = { clickedListener.onLeftAuxButtonClicked() }
                 )
             },
@@ -107,8 +107,8 @@ fun CustomScreen(innerPadding: PaddingValues) {
                     clicked = { clickedListener.onRightAuxButtonClicked() }
                 )
             },
-            decimalSeparator = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.decimalSeparator,
-            groupingSeparator = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.groupingSeparator,
+            decimalSeparator = getDecimalSeparator(),
+            groupingSeparator = getGroupingSeparator(),
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
                     text = data.currency

@@ -14,8 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
-import java.text.DecimalFormat
-import java.text.NumberFormat
 
 @Composable
 fun NumberKeyboard(
@@ -30,8 +28,8 @@ fun NumberKeyboard(
     button: @Composable (Int, NumberKeyboardClickedListener) -> Unit,
     leftAuxButton: @Composable ((NumberKeyboardClickedListener) -> Unit)? = null,
     rightAuxButton: @Composable ((NumberKeyboardClickedListener) -> Unit)? = null,
-    decimalSeparator: Char = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.decimalSeparator,
-    groupingSeparator: Char = (NumberFormat.getNumberInstance() as DecimalFormat).decimalFormatSymbols.groupingSeparator,
+    decimalSeparator: Char = getDecimalSeparator(),
+    groupingSeparator: Char = getGroupingSeparator(),
     listener: NumberKeyboardListener? = null
 ) {
     var amount by remember { mutableStateOf(if (initialAmount != 0.0) initialAmount.toInt().toString() else "") }
