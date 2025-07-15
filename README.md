@@ -1,8 +1,15 @@
 # Number Keyboard  [![](https://jitpack.io/v/davidmigloz/number-keyboard.svg)](https://jitpack.io/#davidmigloz/number-keyboard)
 
-Android library that provides a number keyboard composable.
+KMP library that provides a number keyboard composable.
 
-![screenshot](img/screenshot.png)
+**Android**
+![screenshot_android](img/numberkeyboard_screenshot_android.png)
+
+**iOS**
+![screenshot_ios](img/numberkeyboard_screenshot_ios.png)
+
+**Desktop**
+![screenshot_desktop](img/numberkeyboard_screenshot_web.png)
 
 ## Usage
 
@@ -25,85 +32,176 @@ Add the dependency:
 
 ```gradle
 dependencies {
-        implementation 'com.github.davidmigloz:number-keyboard:4.0.8'
+    implementation 'com.github.davidmigloz:number-keyboard:4.0.8'
 }
 ```
 
 [CHANGELOG](https://github.com/davidmigloz/number-keyboard/blob/master/CHANGELOG.md)
 
-> **Note:** in v4.0.0 the library was migrated to Jetpack Compose. If you need to old Android View based version, please keep using [v3.1.0](https://github.com/davidmigloz/number-keyboard/tree/3.1.0) instead.
+## [5.0.0] - Kotlin Multiplatform Version
+
+### ✨ New Features
+
+• Introduced NumberKeyboardFormat enum to control keypad layout:
+
+```kotlin
+enum class NumberKeyboardFormat {
+    Normal,         // Standard ascending layout (like phone dial pad)
+    Inverted,       // Descending layout (like a calculator)
+    Scrambled,      // Shuffled once on composition
+    AlwaysScrambled // Re-shuffles every tap (chaos, but secure chaos)
+}
+```
+
+### ⚠️ Breaking Changes
+
+- `isInverted: Boolean` is now deprecated
+  One flag was never enough. Now you’ve got four layout options to rule them all. Replace
+
+```kotlin
+isInverted = true
+```
+
+with:
+
+```kotlin
+format = NumberKeyboardFormat.Inverted
+```
+
+**🧭 Migration Guide**
+
+| Before             | After                                  |
+|--------------------|----------------------------------------|
+| isInverted = false | format = NumberKeyboardFormat.Normal   |
+| isInverted = true  | format = NumberKeyboardFormat.Inverted |
+
+- `NumberKeyboard` is now a **stateless composable**.
+    - Removed internal `remember` state for the input amount.
+    - You **must** provide:
+        - `amount: String`
+        - `onAmountChange: (String) -> Unit`
+    - Removed `initialAmount` attribute.
+    - This enables external state management and improves integration with architectures like MVI,
+      ViewModel, etc.
+
+**Before:**
+
+```kotlin
+NumberKeyboard() // internally remembered state
+```
+
+**After:**
+
+```kotlin
+var amount by remember { mutableStateOf("") }
+
+NumberKeyboard(
+    amount = amount,
+    onAmountChange = { amount = it }
+)
+```
+
+## [4.0.0] - Jetpack Compose Version
+
+> **Note:** in v4.0.0 the library was migrated to Jetpack Compose. If you need to old Android View
+> based version, please keep
+> using [v3.1.0](https://github.com/davidmigloz/number-keyboard/tree/3.1.0)
+> instead.
 
 ### Step 3
 
 #### Use `NumberKeyboard` Composable in your layout:
 
 ```kotlin
+var amount by remember { mutableStateOf("") }
+
 NumberKeyboard(
-  maxAllowedAmount = 999.00,
-  maxAllowedDecimals = 0,
-  roundUpToMax = false,
-  button = { number, clickedListener ->
-    NumberKeyboardButton(
-      modifier = buttonModifier,
-      textStyle = buttonTextStyle,
-      number = number,
-      listener = clickedListener
-    )
-  },
-  leftAuxButton = { _ ->
-    NumberKeyboardAuxButton(
-      modifier = buttonModifier,
-      textStyle = buttonTextStyle,
-      imageVector = Icons.Rounded.Fingerprint,
-      clicked = { Toast.makeText(context, "Triggered", Toast.LENGTH_SHORT).show() }
-    )
-  },
-  rightAuxButton = { clickedListener ->
-    NumberKeyboardAuxButton(
-      modifier = buttonModifier,
-      textStyle = buttonTextStyle,
-      imageVector = Icons.Rounded.Backspace,
-      iconTint = MaterialTheme.colorScheme.primary,
-      clicked = { clickedListener.onRightAuxButtonClicked() }
-    )
-  },
-  listener = object : NumberKeyboardListener {
-    override fun onUpdated(data: NumberKeyboardData) {
-      text = data.int.toString()
+    amount = amount,
+    onAmountChanged = { amount = it },
+    maxAllowedAmount = 999.00,
+    maxAllowedDecimals = 0,
+    roundUpToMax = false,
+    button = { number, clickedListener ->
+        NumberKeyboardButton(
+            modifier = buttonModifier,
+            textStyle = buttonTextStyle,
+            number = number,
+            listener = clickedListener
+        )
+    },
+    leftAuxButton = { _ ->
+        NumberKeyboardAuxButton(
+            modifier = buttonModifier,
+            textStyle = buttonTextStyle,
+            imageVector = Icons.Rounded.Fingerprint,
+            clicked = { Toast.makeText(context, "Triggered", Toast.LENGTH_SHORT).show() }
+        )
+    },
+    rightAuxButton = { clickedListener ->
+        NumberKeyboardAuxButton(
+            modifier = buttonModifier,
+            textStyle = buttonTextStyle,
+            imageVector = Icons.Rounded.Backspace,
+            iconTint = MaterialTheme.colorScheme.primary,
+            clicked = { clickedListener.onRightAuxButtonClicked() }
+        )
+    },
+    listener = object : NumberKeyboardListener {
+        override fun onUpdated(data: NumberKeyboardData) {
+            text = data.int.toString()
+        }
     }
-  }
 )
 ```
 
 ##### Attribute
 
-- `initialAmount` - Double (default: 0.0): Initial amount for `NumberKeyboard` output
-- `maxAllowedAmount` - Double (default: 10_000.0): Maximum amount allowed for the `NumberKeyboard` output
-- `maxAllowedDecimals` - Int (default: 2): Maximum decimal points allowed for the `NumberKeyboard` output
-- `currencySymbol` - String (default: "$"): Currency symbol for the `NumberKeyboardData` currency format output
-- `isInverted` - Boolean (default: false): Default number sequence is the phone number pad sequence, inverted is the calculator number pad sequence
-- `roundUpToMax` - Boolean (default: true): Behaviour to round up to the max allowed amount if amount has exceeded
-- `verticalArrangement` - Arrangement.HorizontalOrVertical (default: 8.dp): Vertical spacing between the buttons
-- `horizontalArrangement` - Arrangement.HorizontalOrVertical (default: 8.dp): Horizontal spacing between the buttons
-- `decimalSeparator` - Char (default: DecimalFormat.decimalFormatSymbols.decimalSeparator): Character for decimal separator
-- `groupingSeparator` - Char (default: DecimalFormat.decimalFormatSymbols.groupingSeparator): Character for grouping separator
+- `amount` - String: Variable that keeps
+- `onAmountChanged` - (String)-> Unit:
+- `maxAllowedAmount` - Double (default: 10_000.0): Maximum amount allowed for the `NumberKeyboard`
+  output
+- `maxAllowedDecimals` - Int (default: 2): Maximum decimal points allowed for the `NumberKeyboard`
+  output
+- `currencySymbol` - String (default: "$"): Currency symbol for the `NumberKeyboardData` currency
+- `format` Enum(default: NumberKeyboardFormat.Normal) Defines the layout of the number pad. Options:
+  •	Normal: Standard ascending layout (1–9 top to bottom, like a phone dial pad).
+  •	Inverted: Descending layout (9–1 top to bottom, like a calculator).
+  •	Scrambled: Digits are shuffled once at composition.
+  •	AlwaysScrambled: Digits reshuffle every time the user taps a key — great for max security or mild chaos.
+- `roundUpToMax` - Boolean (default: true): Behaviour to round up to the max allowed amount if
+  amount has exceeded
+- `verticalArrangement` - Arrangement.HorizontalOrVertical (default: 8.dp): Vertical spacing between
+  the buttons
+- `horizontalArrangement` - Arrangement.HorizontalOrVertical (default: 8.dp): Horizontal spacing
+  between the buttons
+- `decimalSeparator` - Char (default: DecimalFormat.decimalFormatSymbols.decimalSeparator):Character
+  for decimal separator
+- `groupingSeparator` - Char (default: DecimalFormat.decimalFormatSymbols.groupingSeparator):
+  Character for grouping separator
 
-##### Composable 
+##### Composable
 
-To harness the power and flexibility of Jetpack Compose, `NumberKeyboard` now provides `@Composable` lambdas that gives you control over all the button layouts.
+To harness the power and flexibility of Jetpack Compose, `NumberKeyboard` now provides `@Composable`
+lambdas that gives you control over all the button layouts.
 Thus, you can easily customise it with shadows, different shapes or even different locales!
 
 1) `button: @Composable (Int, NumberKeyboardClickedListener) -> Unit,`
+
 - `value` - Int: Number of the button pressed
-- `listener` - NumberKeyboardClickedListener: Click listener for all buttons, left aux button and right aux button if applicable.
+- `listener` - NumberKeyboardClickedListener: Click listener for all buttons, left aux button and
+  right aux button if applicable.
 
 2) `leftAuxButton, rightAuxButton: @Composable ((NumberKeyboardClickedListener) -> Unit)? = null`
-- `listener` - NumberKeyboardClickedListener: Click listener for all buttons, left aux button and right aux button if applicable.
 
-For `NumberKeyboardClickedListener`, it is a click listener for all buttons in `NumberKeyboard`. 
-Inside `NumberKeyboard`, there is a `NumberKeyboardClickedListener` instance that will be used to format the output through `NumberKeyboardListener`.
+- `listener` - NumberKeyboardClickedListener: Click listener for all buttons, left aux button and
+  right aux button if applicable.
 
-If you wish to have more control, you can easily just have a `NumberKeyboardClickedListener` at your Fragment level.
+For `NumberKeyboardClickedListener`, it is a click listener for all buttons in `NumberKeyboard`.
+Inside `NumberKeyboard`, there is a `NumberKeyboardClickedListener` instance that will be used to
+format the output through `NumberKeyboardListener`.
+
+If you wish to have more control, you can easily just have a `NumberKeyboardClickedListener` at your
+Fragment level.
 
 ```kotlin
 interface NumberKeyboardClickedListener {
@@ -113,7 +211,8 @@ interface NumberKeyboardClickedListener {
 }
 ```
 
-There is an out-of-box `NumberKeyboardButton` that you can use to quickly get started, it's basically a wrapped `OutlineButton.Text`.
+There is an out-of-box `NumberKeyboardButton` that you can use to quickly get started, it's
+basically a wrapped `OutlineButton.Text`.
 
 ```kotlin
 @Composable
@@ -163,8 +262,10 @@ fun NumberKeyboardAuxButton(
 
 ##### NumberKeyboardListener
 
-This listener is _optional_, but if you want to utilise this. Make sure that the `NumberKeyboardClickedListener` is configured properly when you are building your button layouts.
-After configuration, it will provide `NumberKeyboardData` that has the `rawAmount` from the `NumberKeyboard` inout and it's variation of Integer and Float variable types.  
+This listener is _optional_, but if you want to utilise this. Make sure that the
+`NumberKeyboardClickedListener` is configured properly when you are building your button layouts.
+After configuration, it will provide `NumberKeyboardData` that has the `rawAmount` from the
+`NumberKeyboard` inout and it's variation of Integer and Float variable types.
 
 ```kotlin
 interface NumberKeyboardListener {
@@ -172,42 +273,42 @@ interface NumberKeyboardListener {
 }
 
 class NumberKeyboardData(
-  amount: String,
-  private val decimalSeparator: Char,
-  private val groupingSeparator: Char,
-  private val currencySymbol: String
+    amount: String,
+    private val decimalSeparator: Char,
+    private val groupingSeparator: Char,
+    private val currencySymbol: String
 ) {
-  val rawAmount: String = amount.ifEmpty { "0" }
+    val rawAmount: String = amount.ifEmpty { "0" }
 
-  // Integer
-  val byte: Byte
-    get() = rawAmount.normaliseNumber().toInt().toByte()
+    // Integer
+    val byte: Byte
+        get() = rawAmount.normaliseNumber().toInt().toByte()
 
-  val short: Short
-    get() = rawAmount.normaliseNumber().toInt().toShort()
+    val short: Short
+        get() = rawAmount.normaliseNumber().toInt().toShort()
 
-  val int: Int
-    get() = rawAmount.normaliseNumber().toInt()
+    val int: Int
+        get() = rawAmount.normaliseNumber().toInt()
 
-  val long: Long
-    get() = rawAmount.normaliseNumber().toLong()
+    val long: Long
+        get() = rawAmount.normaliseNumber().toLong()
 
-  // Floating-point
-  val float: Float
-    get() = rawAmount.normaliseNumber().toFloat()
+    // Floating-point
+    val float: Float
+        get() = rawAmount.normaliseNumber().toFloat()
 
-  val double: Double
-    get() = rawAmount.normaliseNumber()
+    val double: Double
+        get() = rawAmount.normaliseNumber()
 
-  val currency: String
-    get() = formatCurrency(rawAmount, decimalSeparator, groupingSeparator, currencySymbol)
+    val currency: String
+        get() = formatCurrency(rawAmount, decimalSeparator, groupingSeparator, currencySymbol)
 }
 ```
 
 ##### Examples
 
 1) Integer `NumberKeyboard`
-  [Sample](https://github.com/davidmigloz/number-keyboard/blob/master/sample/src/main/java/com/davidmiguel/sample/IntegerScreen.kt)
+   [Sample](https://github.com/davidmigloz/number-keyboard/blob/master/sample/src/main/java/com/davidmiguel/sample/IntegerScreen.kt)
 
 ```kotlin
 val maxAllowedDecimals: Int = 0
@@ -243,35 +344,47 @@ val isInverted: Boolean = true
 
 ---
 
-#### Use `NumberKeyboard` AndroidView <= [v3.1.0](https://github.com/davidmigloz/number-keyboard/tree/3.1.0) XML view  in your layout:
+#### Use
+
+`NumberKeyboard` AndroidView <= [v3.1.0](https://github.com/davidmigloz/number-keyboard/tree/3.1.0)
+XML view in your layout:
 
 ```xml
+
 <com.davidmiguel.numberkeyboard.NumberKeyboard
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:keyboard="http://schemas.android.com/apk/res-auto"
-    ...
-    keyboard:numberkeyboard_keyboardType="integer"
-    ... />
+    xmlns:keyboard="http://schemas.android.com/apk/res-auto"...keyboard:numberkeyboard_keyboardType="integer"... />
 ```
 
 ##### Attributes
 
-- `keyboard:numberkeyboard_keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines the type of keyboard.
+- `keyboard:numberkeyboard_keyboardType="[integer|decimal|fingerprint|custom]"` (required): defines
+  the type of keyboard.
     - `integer`: numbers and backspace keys.
     - `decimal`: numbers, comma and backspace keys.
     - `fingerprint`: numbers, fingerprint and backspace keys.
     - `custom`: numbers and defined auxiliary keys.
-- `keyboard:numberkeyboard_keyWidth="[dimension]"` (default: `match_parent`): key width (`wrap_content` not allowed).
-- `keyboard:numberkeyboard_keyHeight="[dimension]"` (default: `match_parent`): key height (`wrap_content` not allowed).
+- `keyboard:numberkeyboard_keyWidth="[dimension]"` (default: `match_parent`): key width (
+  `wrap_content` not allowed).
+- `keyboard:numberkeyboard_keyHeight="[dimension]"` (default: `match_parent`): key height (
+  `wrap_content` not allowed).
 - `keyboard:numberkeyboard_keyPadding="[dimension]"` (default: `16dp`): key padding.
-- `keyboard:numberkeyboard_numberKeyBackground="[reference]"` (default: circle): number keys background drawable.
-- `keyboard:numberkeyboard_numberKeyTextColor="[reference]"` (default: dark blue): number keys text color.
-- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: dark blue): number keys text color.
-- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: none): number keys text typeface.
-- `keyboard:numberkeyboard_numberKeyTextSize="[dimension]"` (default: none): number keys text size (if it is not set, the text auto scales to fit the key).
-- `keyboard:numberkeyboard_leftAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, left auxiliary button background.
-- `keyboard:numberkeyboard_rightAuxBtnIcon="[reference]"` (default: none): if `keyboardType="custom"`, icon shown in right auxiliary button.
-- `keyboard:numberkeyboard_rightAuxBtnBackground="[reference]"` (default: none): if `keyboardType="custom"`, right auxiliary button background.
+- `keyboard:numberkeyboard_numberKeyBackground="[reference]"` (default: circle): number keys
+  background drawable.
+- `keyboard:numberkeyboard_numberKeyTextColor="[reference]"` (default: dark blue): number keys text
+  color.
+- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: dark blue): number keys text
+  color.
+- `keyboard:numberkeyboard_numberKeyTypeface="[reference]"` (default: none): number keys text
+  typeface.
+- `keyboard:numberkeyboard_numberKeyTextSize="[dimension]"` (default: none): number keys text size (
+  if it is not set, the text auto scales to fit the key).
+- `keyboard:numberkeyboard_leftAuxBtnBackground="[reference]"` (default: none): if
+  `keyboardType="custom"`, left auxiliary button background.
+- `keyboard:numberkeyboard_rightAuxBtnIcon="[reference]"` (default: none): if
+  `keyboardType="custom"`, icon shown in right auxiliary button.
+- `keyboard:numberkeyboard_rightAuxBtnBackground="[reference]"` (default: none): if
+  `keyboardType="custom"`, right auxiliary button background.
 
 ##### Methods
 
@@ -300,7 +413,7 @@ To listen to keyboard events, you have to use `NumberKeyboardListener`:
 - `onRightAuxButtonClicked()`: invoked when the right auxiliary button is clicked.
 
 ```kotlin
- numberKeyboard.setListener(object: NumberKeyboardListener {
+ numberKeyboard.setListener(object : NumberKeyboardListener {
     override fun onNumberClicked(number: Int) {
         ...
     }
@@ -315,12 +428,13 @@ To listen to keyboard events, you have to use `NumberKeyboardListener`:
 })
 ```
 
-
-Take a look at the [sample app](https://github.com/davidmigloz/number-keyboard/tree/master/sample) to see the library working.
+Take a look at the [sample app](https://github.com/davidmigloz/number-keyboard/tree/master/sample)to
+see the library working.
 
 ## Contributing
 
-If you find any issues or you have any questions, ideas... feel free to [open an issue](https://github.com/davidmigloz/number-keyboard/issues/new).
+If you find any issues or you have any questions, ideas... feel free
+to [open an issue](https://github.com/davidmigloz/number-keyboard/issues/new).
 Pull request are very appreciated.
 
 ## License
