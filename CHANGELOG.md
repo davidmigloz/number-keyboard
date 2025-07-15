@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 5.0.0  *(15/07/2025)*
+
+- Migrate to Kotlin Multiplatform (#45)
+
 ## Version 4.0.8  *(16/06/2025)*
 
 - Update dependencies and target SDK 36
