@@ -56,7 +56,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.davidmigloz.numberkeyboard.sample"
+    namespace = "com.davidmiguel.numberkeyboard.sample"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -80,11 +80,11 @@ android {
 
 compose.desktop {
     application {
-        mainClass = "com.davidmigloz.numberkeyboard.sample.MainKt"
+        mainClass = "com.davidmiguel.numberkeyboard.sample.MainKt"
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.davidmigloz.numberkeyboard.sample"
+            packageName = "com.davidmiguel.numberkeyboard.sample"
             packageVersion = generateVersionName(versionMajor, versionMinor, versionPatch, versionClassifier)
         }
     }
