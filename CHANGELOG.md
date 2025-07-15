@@ -1,5 +1,9 @@
 # Change Log
 
+## Version 5.0.1  *(15/07/2025)*
+
+- Fix Android target configuration (#46)
+
 ## Version 5.0.0  *(15/07/2025)*
 
 - Migrate to Kotlin Multiplatform (#45)
