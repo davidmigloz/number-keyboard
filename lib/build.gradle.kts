@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose.multiplatform)
     alias(libs.plugins.compose.compiler)
+    id("maven-publish")
 }
 
 val versionMajor = 5 // API Changes, adding big new feature, redesign the App
@@ -13,9 +14,7 @@ val versionPatch = 0 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 kotlin {
-    androidTarget {
-        publishLibraryVariants("release")
-    }
+    androidTarget()
     listOf(
         iosX64(),
         iosArm64(),
@@ -45,6 +44,9 @@ android {
         version = generateVersionName(versionMajor, versionMinor, versionPatch, versionClassifier)
 
         consumerProguardFiles("proguard-rules.pro")
+    }
+    publishing {
+        singleVariant("release")
     }
     resourcePrefix = "numberkeyboard_"
 }
