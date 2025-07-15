@@ -64,7 +64,10 @@ fun IntegerScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
+        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
+            amount = amount,
+            onAmountChange = { amount = it },
             maxAllowedDecimals = 0,
             button = { number, clickedListener ->
                 NumberKeyboardButton(

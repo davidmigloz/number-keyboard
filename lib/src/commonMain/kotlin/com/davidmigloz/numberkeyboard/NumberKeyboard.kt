@@ -5,19 +5,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
+import kotlin.text.format
 
 @Composable
 fun NumberKeyboard(
-    initialAmount: Double = 0.0,
+    amount: String,
+    onAmountChange: (String) -> Unit,
     maxAllowedAmount: Double = 10_000.0,
     maxAllowedDecimals: Int = 2,
     currencySymbol: String = "$",
@@ -32,8 +30,6 @@ fun NumberKeyboard(
     groupingSeparator: Char = getGroupingSeparator(),
     listener: NumberKeyboardListener? = null
 ) {
-    var amount by remember { mutableStateOf(if (initialAmount != 0.0) initialAmount.toInt().toString() else "") }
-
     val firstRow: List<Int>
     val secondRow: List<Int>
     val thirdRow: List<Int>
@@ -54,65 +50,72 @@ fun NumberKeyboard(
     val clickedListener = object : NumberKeyboardClickedListener {
         override fun onNumberClicked(number: Int) {
             if (amount.isEmpty() && number == 0) return
-            val appendedAmount = amount + number.toString()
-            val standardisedAmount = appendedAmount.replace(",", ".").toDoubleOrNull() ?: 0.0
+            val appended = amount + number.toString()
+            val standardised = appended.replace(',', '.').toDoubleOrNull() ?: 0.0
 
-            if (getNumberOfDecimals(appendedAmount, decimalSeparator) > maxAllowedDecimals) return
-            if (standardisedAmount in 0.0..maxAllowedAmount) {
-                amount += number
-            } else {
-                amount = if (roundUpToMax) maxAllowedAmount.toString().replace('.', decimalSeparator) else amount
+            if (getNumberOfDecimals(appended, decimalSeparator) > maxAllowedDecimals) return
+
+            if (standardised in 0.0..maxAllowedAmount) {
+                onAmountChange(appended)
+                listener?.onUpdated(NumberKeyboardData(appended, decimalSeparator, groupingSeparator, currencySymbol))
+            } else if (roundUpToMax) {
+                val maxAmount = "%.${maxAllowedDecimals}f".format(maxAllowedAmount)
+                    .replace('.', decimalSeparator)
+                onAmountChange(maxAmount)
+                listener?.onUpdated(NumberKeyboardData(maxAmount, decimalSeparator, groupingSeparator, currencySymbol))
             }
-            listener?.onUpdated(NumberKeyboardData(amount, decimalSeparator, groupingSeparator, currencySymbol))
         }
 
         override fun onLeftAuxButtonClicked() {
             if (!amount.contains(decimalSeparator)) {
-                amount = if (amount.isEmpty()) {
+                val updated = if (amount.isEmpty()) {
                     "0$decimalSeparator"
                 } else {
                     "$amount$decimalSeparator"
                 }
+                onAmountChange(updated)
+                listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
             }
-            listener?.onUpdated(NumberKeyboardData(amount, decimalSeparator, groupingSeparator, currencySymbol))
         }
 
         override fun onRightAuxButtonClicked() {
             if (amount.isEmpty()) return
-            val trimmedAmountText = amount.trimEnd(decimalSeparator)
-            val newAmountText = if (trimmedAmountText.length <= 1) {
-                ""
+
+            val shouldTrimDecimals = maxAllowedDecimals == 0 &&
+                    amount.contains(decimalSeparator) &&
+                    amount.substringAfter(decimalSeparator).all { it == '0' }
+
+            val cleanedAmount = if (shouldTrimDecimals) {
+                amount.substringBefore(decimalSeparator)
             } else {
-                trimmedAmountText.substring(0, trimmedAmountText.length - 1)
+                amount
             }
-            amount = newAmountText
-            listener?.onUpdated(NumberKeyboardData(amount, decimalSeparator, groupingSeparator, currencySymbol))
+
+            val updated = if (cleanedAmount.length <= 1) "" else cleanedAmount.dropLast(1)
+            onAmountChange(updated)
+            listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
         }
     }
 
     Column(verticalArrangement = verticalArrangement) {
         Row(Modifier.fillMaxWidth(), horizontalArrangement = horizontalArrangement) {
-            firstRow.forEach { button.invoke(it, clickedListener) }
+            firstRow.forEach { button(it, clickedListener) }
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = horizontalArrangement) {
-            secondRow.forEach { button.invoke(it, clickedListener) }
+            secondRow.forEach { button(it, clickedListener) }
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = horizontalArrangement) {
-            thirdRow.forEach { button.invoke(it, clickedListener) }
+            thirdRow.forEach { button(it, clickedListener) }
         }
         Row(Modifier.fillMaxWidth(), horizontalArrangement = horizontalArrangement) {
             leftAuxButton?.invoke(clickedListener) ?: NumberKeyboardBlank()
-            button.invoke(fourthRow, clickedListener)
+            button(fourthRow, clickedListener)
             rightAuxButton?.invoke(clickedListener) ?: NumberKeyboardBlank()
         }
     }
 }
 
 private fun getNumberOfDecimals(amount: String, decimalSeparator: Char): Int {
-    val separatorIndex = amount.indexOf(decimalSeparator)
-    return if (separatorIndex >= 0) {
-        amount.length - separatorIndex - 1
-    } else {
-        0
-    }
+    val index = amount.indexOf(decimalSeparator)
+    return if (index >= 0) amount.length - index - 1 else 0
 }

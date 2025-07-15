@@ -59,7 +59,10 @@ fun DecimalScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
+        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
+            amount = amount,
+            onAmountChange = { amount = it },
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,

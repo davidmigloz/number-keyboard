@@ -46,7 +46,7 @@ fun BiometricScreen(innerPadding: PaddingValues) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "maxAllowedAmount = 9_999.00\n" +
+            text = "maxAllowedAmount = 9_999\n" +
                     "maxAllowedDecimals = 0\n" +
                     "roundUpToMax = false",
             style = MaterialTheme.typography.titleMedium,
@@ -67,7 +67,10 @@ fun BiometricScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
+        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
+            amount = amount,
+            onAmountChange = { amount = it },
             maxAllowedAmount = 9_999.00,
             maxAllowedDecimals = 0,
             roundUpToMax = false,

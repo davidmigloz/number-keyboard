@@ -75,7 +75,10 @@ fun CustomScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .aspectRatio(1F)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
+        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
+            amount = amount,
+            onAmountChange = { amount = it },
             maxAllowedAmount = 8_888.888,
             maxAllowedDecimals = 3,
             currencySymbol = currencySymbol,
