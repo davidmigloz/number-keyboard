@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import versioning.generateVersionName
 
 plugins {
@@ -16,9 +15,6 @@ val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT
 kotlin {
     androidTarget {
         publishLibraryVariants("release")
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
     }
     listOf(
         iosX64(),
@@ -31,9 +27,6 @@ kotlin {
         }
     }
     jvm("desktop")
-
-    jvmToolchain(libs.versions.jvm.get().toInt())
-
     sourceSets {
         commonMain.dependencies {
             implementation(project.dependencies.platform(libs.compose.bom))

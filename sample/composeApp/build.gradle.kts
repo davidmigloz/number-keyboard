@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import versioning.generateVersionCode
 import versioning.generateVersionName
 
@@ -17,11 +16,7 @@ val versionPatch = 0 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.valueOf("JVM_${libs.versions.jvm.get()}"))
-        }
-    }
+    androidTarget()
     listOf(
         iosX64(),
         iosArm64(),
