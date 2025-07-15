@@ -67,7 +67,7 @@ fun IntegerScreen(innerPadding: PaddingValues) {
         var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChange = { amount = it },
+            onAmountChanged = { amount = it },
             maxAllowedDecimals = 0,
             button = { number, clickedListener ->
                 NumberKeyboardButton(

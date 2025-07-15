@@ -8,9 +8,9 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-val versionMajor = 4 // API Changes, adding big new feature, redesign the App
+val versionMajor = 5 // API Changes, adding big new feature, redesign the App
 val versionMinor = 0 // New features in a backwards-compatible manner
-val versionPatch = 8 // Backwards-compatible bug fixes
+val versionPatch = 0 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 kotlin {

@@ -70,7 +70,7 @@ fun BiometricScreen(innerPadding: PaddingValues) {
         var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChange = { amount = it },
+            onAmountChanged = { amount = it },
             maxAllowedAmount = 9_999.00,
             maxAllowedDecimals = 0,
             roundUpToMax = false,

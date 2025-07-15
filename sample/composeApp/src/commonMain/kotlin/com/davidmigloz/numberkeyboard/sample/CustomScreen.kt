@@ -105,7 +105,7 @@ fun CustomScreen(innerPadding: PaddingValues) {
         var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChange = { amount = it },
+            onAmountChanged = { amount = it },
             maxAllowedAmount = 8_888.888,
             maxAllowedDecimals = 3,
             currencySymbol = currencySymbol,

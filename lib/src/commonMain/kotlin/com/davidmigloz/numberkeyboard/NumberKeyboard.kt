@@ -12,12 +12,12 @@ import com.davidmigloz.numberkeyboard.data.NumberKeyboardData
 import com.davidmigloz.numberkeyboard.data.NumberKeyboardFormat
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardClickedListener
 import com.davidmigloz.numberkeyboard.listener.NumberKeyboardListener
-import kotlin.text.format
+import kotlin.math.pow
 
 @Composable
 fun NumberKeyboard(
     amount: String,
-    onAmountChange: (String) -> Unit,
+    onAmountChanged: (String) -> Unit,
     maxAllowedAmount: Double = 10_000.0,
     maxAllowedDecimals: Int = 2,
     currencySymbol: String = "$",
@@ -75,12 +75,11 @@ fun NumberKeyboard(
             if (getNumberOfDecimals(appended, decimalSeparator) > maxAllowedDecimals) return
 
             if (standardised in 0.0..maxAllowedAmount) {
-                onAmountChange(appended)
+                onAmountChanged(appended)
                 listener?.onUpdated(NumberKeyboardData(appended, decimalSeparator, groupingSeparator, currencySymbol))
             } else if (roundUpToMax) {
-                val maxAmount = "%.${maxAllowedDecimals}f".format(maxAllowedAmount)
-                    .replace('.', decimalSeparator)
-                onAmountChange(maxAmount)
+                val maxAmount = formatMaxAmount(maxAllowedAmount, maxAllowedDecimals, decimalSeparator)
+                onAmountChanged(maxAmount)
                 listener?.onUpdated(NumberKeyboardData(maxAmount, decimalSeparator, groupingSeparator, currencySymbol))
             }
         }
@@ -92,7 +91,7 @@ fun NumberKeyboard(
                 } else {
                     "$amount$decimalSeparator"
                 }
-                onAmountChange(updated)
+                onAmountChanged(updated)
                 listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
             }
         }
@@ -111,7 +110,7 @@ fun NumberKeyboard(
             }
 
             val updated = if (cleanedAmount.length <= 1) "" else cleanedAmount.dropLast(1)
-            onAmountChange(updated)
+            onAmountChanged(updated)
             listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
         }
     }
@@ -137,4 +136,20 @@ fun NumberKeyboard(
 private fun getNumberOfDecimals(amount: String, decimalSeparator: Char): Int {
     val index = amount.indexOf(decimalSeparator)
     return if (index >= 0) amount.length - index - 1 else 0
+}
+
+private fun formatMaxAmount(
+    maxAllowedAmount: Double,
+    maxAllowedDecimals: Int,
+    decimalSeparator: Char
+): String {
+    val factor = 10.0.pow(maxAllowedDecimals)
+    val rounded = kotlin.math.round(maxAllowedAmount * factor) / factor
+    val parts = rounded.toString().split('.')
+
+    val integerPart = parts[0]
+    val decimalPart = parts.getOrNull(1)?.padEnd(maxAllowedDecimals, '0')
+        ?: "0".repeat(maxAllowedDecimals)
+
+    return "$integerPart$decimalSeparator$decimalPart"
 }

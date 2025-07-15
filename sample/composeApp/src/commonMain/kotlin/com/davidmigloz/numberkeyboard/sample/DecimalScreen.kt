@@ -62,7 +62,7 @@ fun DecimalScreen(innerPadding: PaddingValues) {
         var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChange = { amount = it },
+            onAmountChanged = { amount = it },
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
