@@ -17,7 +17,6 @@ import kotlin.math.pow
 @Composable
 fun NumberKeyboard(
     amount: String,
-    onAmountChanged: (String) -> Unit,
     maxAllowedAmount: Double = 10_000.0,
     maxAllowedDecimals: Int = 2,
     currencySymbol: String = "$",
@@ -69,17 +68,15 @@ fun NumberKeyboard(
     val clickedListener = object : NumberKeyboardClickedListener {
         override fun onNumberClicked(number: Int) {
             if (amount.isEmpty() && number == 0) return
-            val appended = amount + number.toString()
+            val appended = if (amount == "0") number.toString() else amount + number.toString()
             val standardised = appended.replace(',', '.').toDoubleOrNull() ?: 0.0
 
             if (getNumberOfDecimals(appended, decimalSeparator) > maxAllowedDecimals) return
 
             if (standardised in 0.0..maxAllowedAmount) {
-                onAmountChanged(appended)
                 listener?.onUpdated(NumberKeyboardData(appended, decimalSeparator, groupingSeparator, currencySymbol))
             } else if (roundUpToMax) {
                 val maxAmount = formatMaxAmount(maxAllowedAmount, maxAllowedDecimals, decimalSeparator)
-                onAmountChanged(maxAmount)
                 listener?.onUpdated(NumberKeyboardData(maxAmount, decimalSeparator, groupingSeparator, currencySymbol))
             }
         }
@@ -91,7 +88,6 @@ fun NumberKeyboard(
                 } else {
                     "$amount$decimalSeparator"
                 }
-                onAmountChanged(updated)
                 listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
             }
         }
@@ -110,7 +106,6 @@ fun NumberKeyboard(
             }
 
             val updated = if (cleanedAmount.length <= 1) "" else cleanedAmount.dropLast(1)
-            onAmountChanged(updated)
             listener?.onUpdated(NumberKeyboardData(updated, decimalSeparator, groupingSeparator, currencySymbol))
         }
     }

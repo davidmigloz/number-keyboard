@@ -12,7 +12,7 @@ plugins {
 
 val versionMajor = 3 // API Changes, adding big new feature, redesign the App
 val versionMinor = 0 // New features in a backwards-compatible manner
-val versionPatch = 0 // Backwards-compatible bug fixes
+val versionPatch = 1 // Backwards-compatible bug fixes
 val versionClassifier: String? = null // Pre-releases (alpha, beta, rc, SNAPSHOT...)
 
 kotlin {
