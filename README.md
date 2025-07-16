@@ -38,6 +38,31 @@ dependencies {
 
 [CHANGELOG](https://github.com/davidmigloz/number-keyboard/blob/master/CHANGELOG.md)
 
+## [5.0.2]
+
+- Fixed  `rawAmount` having 0 in front.
+
+### ⚠️ Breaking Changes
+
+- Removed `onAmountChange: (String) -> Unit` and merge with `NumberKeyboardListener` implementation.
+
+**🧭 Migration Guide**
+
+```kotlin
+var amountWithCurrency by remember { mutableStateOf("$currencySymbol 0") }
+var amount by remember { mutableStateOf("") }
+
+NumberKeyboard(
+    amount = amount,
+    listener = object : NumberKeyboardListener {
+        override fun onUpdated(data: NumberKeyboardData) {
+            amountWithCurrency = data.currency
+            amount = data.rawAmount
+        }
+    }
+)
+```
+
 ## [5.0.0] - Kotlin Multiplatform Version
 
 ### ✨ New Features
@@ -113,11 +138,11 @@ NumberKeyboard(
 #### Use `NumberKeyboard` Composable in your layout:
 
 ```kotlin
+var amountWithCurrency by remember { mutableStateOf("$currencySymbol 0") }
 var amount by remember { mutableStateOf("") }
 
 NumberKeyboard(
     amount = amount,
-    onAmountChanged = { amount = it },
     maxAllowedAmount = 999.00,
     maxAllowedDecimals = 0,
     roundUpToMax = false,
@@ -148,7 +173,8 @@ NumberKeyboard(
     },
     listener = object : NumberKeyboardListener {
         override fun onUpdated(data: NumberKeyboardData) {
-            text = data.int.toString()
+          amountWithCurrency = data.currency
+          amount = data.rawAmount
         }
     }
 )
@@ -157,17 +183,17 @@ NumberKeyboard(
 ##### Attribute
 
 - `amount` - String: Variable that keeps
-- `onAmountChanged` - (String)-> Unit:
 - `maxAllowedAmount` - Double (default: 10_000.0): Maximum amount allowed for the `NumberKeyboard`
   output
 - `maxAllowedDecimals` - Int (default: 2): Maximum decimal points allowed for the `NumberKeyboard`
   output
 - `currencySymbol` - String (default: "$"): Currency symbol for the `NumberKeyboardData` currency
 - `format` Enum(default: NumberKeyboardFormat.Normal) Defines the layout of the number pad. Options:
-  •	Normal: Standard ascending layout (1–9 top to bottom, like a phone dial pad).
-  •	Inverted: Descending layout (9–1 top to bottom, like a calculator).
-  •	Scrambled: Digits are shuffled once at composition.
-  •	AlwaysScrambled: Digits reshuffle every time the user taps a key — great for max security or mild chaos.
+  • Normal: Standard ascending layout (1–9 top to bottom, like a phone dial pad).
+  • Inverted: Descending layout (9–1 top to bottom, like a calculator).
+  • Scrambled: Digits are shuffled once at composition.
+  • AlwaysScrambled: Digits reshuffle every time the user taps a key — great for max security or
+  mild chaos.
 - `roundUpToMax` - Boolean (default: true): Behaviour to round up to the max allowed amount if
   amount has exceeded
 - `verticalArrangement` - Arrangement.HorizontalOrVertical (default: 8.dp): Vertical spacing between

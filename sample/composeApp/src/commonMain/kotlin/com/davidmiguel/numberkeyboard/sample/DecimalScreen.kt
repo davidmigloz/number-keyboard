@@ -46,10 +46,11 @@ fun DecimalScreen(innerPadding: PaddingValues) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var text by remember { mutableStateOf("$currencySymbol 0") }
+        var amountWithCurrency by remember { mutableStateOf("$currencySymbol 0") }
+        var amount by remember { mutableStateOf("") }
 
         Text(
-            text = text,
+            text = amountWithCurrency,
             style = MaterialTheme.typography.displayLarge,
         )
 
@@ -59,10 +60,8 @@ fun DecimalScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
-        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChanged = { amount = it },
             button = { number, clickedListener ->
                 NumberKeyboardButton(
                     modifier = buttonModifier,
@@ -89,7 +88,8 @@ fun DecimalScreen(innerPadding: PaddingValues) {
             },
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.currency
+                    amountWithCurrency = data.currency
+                    amount = data.rawAmount
                 }
             }
         )

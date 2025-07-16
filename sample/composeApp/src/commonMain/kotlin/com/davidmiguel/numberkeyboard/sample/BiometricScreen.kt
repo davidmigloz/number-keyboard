@@ -54,10 +54,10 @@ fun BiometricScreen(innerPadding: PaddingValues) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var text by remember { mutableStateOf("0") }
+        var amount by remember { mutableStateOf("0") }
 
         Text(
-            text = text,
+            text = amount,
             style = MaterialTheme.typography.displayLarge,
         )
 
@@ -67,10 +67,8 @@ fun BiometricScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
-        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChanged = { amount = it },
             maxAllowedAmount = 9_999.00,
             maxAllowedDecimals = 0,
             roundUpToMax = false,
@@ -87,9 +85,7 @@ fun BiometricScreen(innerPadding: PaddingValues) {
                     modifier = buttonModifier,
                     textStyle = buttonTextStyle,
                     imageVector = Icons.Rounded.Fingerprint,
-                    clicked = {
-//                        Toast.makeText(context, "Biometrics Triggered", Toast.LENGTH_SHORT).show()
-                    }
+                    clicked = {}
                 )
             },
             rightAuxButton = { clickedListener ->
@@ -102,7 +98,7 @@ fun BiometricScreen(innerPadding: PaddingValues) {
             },
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.int.toString()
+                    amount = data.int.toString()
                 }
             }
         )

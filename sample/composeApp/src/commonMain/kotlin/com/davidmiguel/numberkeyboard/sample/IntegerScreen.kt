@@ -51,10 +51,10 @@ fun IntegerScreen(innerPadding: PaddingValues) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        var text by remember { mutableStateOf("0") }
+        var amount by remember { mutableStateOf("0") }
 
         Text(
-            text = text,
+            text = amount,
             style = MaterialTheme.typography.displayLarge,
         )
 
@@ -64,10 +64,8 @@ fun IntegerScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .height(48.dp)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
-        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChanged = { amount = it },
             maxAllowedDecimals = 0,
             button = { number, clickedListener ->
                 NumberKeyboardButton(
@@ -87,7 +85,7 @@ fun IntegerScreen(innerPadding: PaddingValues) {
             },
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.int.toString()
+                    amount = data.int.toString()
                 }
             }
         )

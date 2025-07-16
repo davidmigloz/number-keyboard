@@ -89,10 +89,11 @@ fun CustomScreen(innerPadding: PaddingValues) {
             }
         }
 
-        var text by remember { mutableStateOf("$currencySymbol 0") }
+        var amountWithCurrency by remember { mutableStateOf("$currencySymbol 0") }
+        var amount by remember { mutableStateOf("") }
 
         Text(
-            text = text,
+            text = amountWithCurrency,
             style = MaterialTheme.typography.displayLarge,
         )
 
@@ -102,10 +103,8 @@ fun CustomScreen(innerPadding: PaddingValues) {
             .weight(1F)
             .aspectRatio(1F)
         val buttonTextStyle = MaterialTheme.typography.titleMedium
-        var amount by remember { mutableStateOf("") }
         NumberKeyboard(
             amount = amount,
-            onAmountChanged = { amount = it },
             maxAllowedAmount = 8_888.888,
             maxAllowedDecimals = 3,
             currencySymbol = currencySymbol,
@@ -141,7 +140,8 @@ fun CustomScreen(innerPadding: PaddingValues) {
             groupingSeparator = getGroupingSeparator(),
             listener = object : NumberKeyboardListener {
                 override fun onUpdated(data: NumberKeyboardData) {
-                    text = data.currency
+                    amountWithCurrency = data.currency
+                    amount = data.rawAmount
                 }
             }
         )
