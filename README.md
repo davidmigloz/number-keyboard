@@ -38,93 +38,10 @@ dependencies {
 
 [CHANGELOG](https://github.com/davidmigloz/number-keyboard/blob/master/CHANGELOG.md)
 
-## [5.0.2]
 
-- Fixed  `rawAmount` having 0 in front.
+#### [5.0.0] - Kotlin Multiplatform Version
 
-### ⚠️ Breaking Changes
 
-- Removed `onAmountChange: (String) -> Unit` and merge with `NumberKeyboardListener` implementation.
-
-**🧭 Migration Guide**
-
-```kotlin
-var amountWithCurrency by remember { mutableStateOf("$currencySymbol 0") }
-var amount by remember { mutableStateOf("") }
-
-NumberKeyboard(
-    amount = amount,
-    listener = object : NumberKeyboardListener {
-        override fun onUpdated(data: NumberKeyboardData) {
-            amountWithCurrency = data.currency
-            amount = data.rawAmount
-        }
-    }
-)
-```
-
-## [5.0.0] - Kotlin Multiplatform Version
-
-### ✨ New Features
-
-• Introduced NumberKeyboardFormat enum to control keypad layout:
-
-```kotlin
-enum class NumberKeyboardFormat {
-    Normal,         // Standard ascending layout (like phone dial pad)
-    Inverted,       // Descending layout (like a calculator)
-    Scrambled,      // Shuffled once on composition
-    AlwaysScrambled // Re-shuffles every tap (chaos, but secure chaos)
-}
-```
-
-### ⚠️ Breaking Changes
-
-- `isInverted: Boolean` is now deprecated
-  One flag was never enough. Now you’ve got four layout options to rule them all. Replace
-
-```kotlin
-isInverted = true
-```
-
-with:
-
-```kotlin
-format = NumberKeyboardFormat.Inverted
-```
-
-**🧭 Migration Guide**
-
-| Before             | After                                  |
-|--------------------|----------------------------------------|
-| isInverted = false | format = NumberKeyboardFormat.Normal   |
-| isInverted = true  | format = NumberKeyboardFormat.Inverted |
-
-- `NumberKeyboard` is now a **stateless composable**.
-    - Removed internal `remember` state for the input amount.
-    - You **must** provide:
-        - `amount: String`
-        - `onAmountChange: (String) -> Unit`
-    - Removed `initialAmount` attribute.
-    - This enables external state management and improves integration with architectures like MVI,
-      ViewModel, etc.
-
-**Before:**
-
-```kotlin
-NumberKeyboard() // internally remembered state
-```
-
-**After:**
-
-```kotlin
-var amount by remember { mutableStateOf("") }
-
-NumberKeyboard(
-    amount = amount,
-    onAmountChange = { amount = it }
-)
-```
 
 ## [4.0.0] - Jetpack Compose Version
 
